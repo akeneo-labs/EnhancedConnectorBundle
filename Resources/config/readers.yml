@@ -1,0 +1,14 @@
+parameters:
+    akeneo_labs.pim.enhanced_connector.reader.product.class: AkeneoLabs\Pim\Bundle\EnhancedConnectorBundle\Reader\ProductReader
+
+services:
+    akeneo_labs.pim.enhanced_connector.reader.product:
+        class: %akeneo_labs.pim.enhanced_connector.reader.product.class%
+        arguments:
+            - '@pim_catalog.query.product_query_builder_factory'
+            - '@pim_catalog.manager.channel'
+            - '@pim_catalog.manager.completeness'
+            - '@pim_transform.converter.metric'
+            - '@doctrine.orm.default_entity_manager'
+            - true
+            - %akeneo_batch.entity.job_execution.class%
