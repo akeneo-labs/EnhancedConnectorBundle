@@ -1,0 +1,31 @@
+pim:
+    enhanced_connector:
+        export:
+            product:
+                title: Export product using enhanced product reader
+        product_reader:
+            updatedCondition:
+                label: Updated time condition
+                help: Define if and how the updated time condition will apply on the product selection
+                choices:
+                    fromDefinedDate: Export products updated since the defined date
+                    fromLastExecution: Export products updated since the last execution of this job
+                    doNotApply: Export products regardless of their updated time
+            updatedSince:
+                label: Updated since
+                help: Define the minimum updated date to select product
+            enabledCondition:
+                label: Status condition
+                help: Define if and how the status condition will apply on the product selection
+                choices:
+                    onlyEnabled: Export only enabled products
+                    onlyDisabled: Export only disabled products
+                    doNotApply: Export products regardless of their status
+            completeCondition:
+                label: Complete condition
+                help: Define if and how the complete condition will apply on the product selection
+                choices:
+                    onlyComplete: Export only complete products
+                    onlyUncomplete: Export only uncomplete products
+                    doNotApply: Export products regardless of their completeness
+

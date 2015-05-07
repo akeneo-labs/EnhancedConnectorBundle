@@ -25,9 +25,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class ProductReader extends AbstractConfigurableStepElement implements ProductReaderInterface
 {
-    /** @staticvar string */
-    const DO_NOT_APPLY= 'doNotAppply';
-
     /**
      * @var string
      *
@@ -55,22 +52,22 @@ class ProductReader extends AbstractConfigurableStepElement implements ProductRe
      * @Assert\NotBlank(groups={"Execution"})
      * @var string
      */
-    protected $updatedCriteria;
+    protected $updatedCondition;
 
     /** @var DateTime */
-    protected $updatedFrom;
+    protected $updatedSince;
 
     /**
      * @Assert\NotBlank(groups={"Execution"})
      * @var string
      */
-    protected $enabledCriteria;
+    protected $enabledCondition;
 
     /**
      * @Assert\NotBlank(groups={"Execution"})
      * @var string
      */
-    protected $completeCriteria;
+    protected $completeCondition;
 
     /** @var string */
     protected $jobExecutionClass;
@@ -134,21 +131,21 @@ class ProductReader extends AbstractConfigurableStepElement implements ProductRe
      *
      * @return string
      */
-    public function getUpdatedFrom()
+    public function getUpdatedSince()
     {
-        return $this->updatedFrom;
+        return $this->updatedSince;
     }
 
     /**
      * Set updated from condition
      *
-     * @param string $updatedFrom updatedFrom
+     * @param string $updatedSince updatedSince
      *
      * @return AbstractProcessor
      */
-    public function setUpdatedFrom(\DateTime $updatedFrom = null)
+    public function setUpdatedSince(\DateTime $updatedSince = null)
     {
-        $this->updatedFrom = $updatedFrom;
+        $this->updatedSince = $updatedSince;
 
         return $this;
     }
@@ -158,21 +155,21 @@ class ProductReader extends AbstractConfigurableStepElement implements ProductRe
      *
      * @return string
      */
-    public function getUpdatedCriteria()
+    public function getUpdatedCondition()
     {
-        return $this->updatedCriteria;
+        return $this->updatedCondition;
     }
 
     /**
      * Set updated condition
      *
-     * @param string $updatedCriteria
+     * @param string $updatedCondition
      *
      * @return AbstractProcessor
      */
-    public function setUpdatedCriteria($updatedCriteria)
+    public function setUpdatedCondition($updatedCondition)
     {
-        $this->updatedCriteria = $updatedCriteria;
+        $this->updatedCondition = $updatedCondition;
 
         return $this;
     }
@@ -182,21 +179,21 @@ class ProductReader extends AbstractConfigurableStepElement implements ProductRe
      *
      * @return string
      */
-    public function getEnabledCriteria()
+    public function getEnabledCondition()
     {
-        return $this->enabledCriteria;
+        return $this->enabledCondition;
     }
 
     /**
      * Set enabled condition
      *
-     * @param string $enabledCriteria
+     * @param string $enabledCondition
      *
      * @return AbstractProcessor
      */
-    public function setEnabledCriteria($enabledCriteria)
+    public function setEnabledCondition($enabledCondition)
     {
-        $this->enabledCriteria = $enabledCriteria;
+        $this->enabledCondition = $enabledCondition;
 
         return $this;
     }
@@ -206,21 +203,21 @@ class ProductReader extends AbstractConfigurableStepElement implements ProductRe
      *
      * @return string
      */
-    public function getCompleteCriteria()
+    public function getCompleteCondition()
     {
-        return $this->completeCriteria;
+        return $this->completeCondition;
     }
 
     /**
      * Set complete condition
      *
-     * @param string $completeCriteria
+     * @param string $completeCondition
      *
      * @return AbstractProcessor
      */
-    public function setCompleteCriteria($completeCriteria)
+    public function setCompleteCondition($completeCondition)
     {
-        $this->completeCriteria = $completeCriteria;
+        $this->completeCondition = $completeCondition;
 
         return $this;
     }
@@ -241,49 +238,52 @@ class ProductReader extends AbstractConfigurableStepElement implements ProductRe
                         'help'     => 'pim_base_connector.export.channel.help'
                     ]
                 ],
-                'updatedCriteria' => [
+                'updatedCondition' => [
                     'type'    => 'choice',
-                    'required' => true,
                     'options' => [
-                        'help'    => 'akeneo_labs_pim.enhanced_product_export.updatedCriteria.help',
-                        'label'   => 'akeneo_labs_pim.enhanced_product_export.updatedCriteria.label',
+                        'required' => true,
+                        'select2'  => true,
+                        'label'   => 'pim.enhanced_connector.product_reader.updatedCondition.label',
+                        'help'    => 'pim.enhanced_connector.product_reader.updatedCondition.help',
                         'choices'  => [
-                            'fromDefinedDate'    => 'Export products updated since the defined date',
-                            'fromLastExecution'  => 'Export products updated since the last execution of this job',
-                            static::DO_NOT_APPLY => 'Export products regardless of their updated time',
+                            'doNotApply'        => 'pim.enhanced_connector.product_reader.updatedCondition.choices.doNotApply',
+                            'fromDefinedDate'   => 'pim.enhanced_connector.product_reader.updatedCondition.choices.fromDefinedDate',
+                            'fromLastExecution' => 'pim.enhanced_connector.product_reader.updatedCondition.choices.fromLastExecution'
                         ]
                     ]
                 ],
-                'updatedFrom' => [
-                    'required' => false,
+                'updatedSince' => [
                     'options' => [
-                        'help'    => 'dnd_magento_connector.export.updatedFrom.help',
-                        'label'   => 'dnd_magento_connector.export.updatedFrom.label',
+                        'required' => false,
+                        'label' => 'pim.enhanced_connector.product_reader.updatedSince.label',
+                        'help'  => 'pim.enhanced_connector.product_reader.updatedSince.help'
                     ]
                 ],
-                'enabledCriteria' => [
+                'enabledCondition' => [
                     'type'    => 'choice',
-                    'required' => true,
                     'options' => [
-                        'help'    => 'akeneo_labs_pim.enhanced_product_export.enabledCriteria.help',
-                        'label'   => 'akeneo_labs_pim.enhanced_product_export.enabledCriteria.label',
+                        'required' => true,
+                        'select2'  => true,
+                        'help'    => 'pim.enhanced_connector.product_reader.enabledCondition.help',
+                        'label'   => 'pim.enhanced_connector.product_reader.enabledCondition.label',
                         'choices'  => [
-                            'onlyEnabled'        => 'Export only enabled products',
-                            'onlyDisabled'       => 'Export only disabled products',
-                            static::DO_NOT_APPLY => 'Export products regardless of their status',
+                            'onlyEnabled'  => 'pim.enhanced_connector.product_reader.enabledCondition.choices.onlyEnabled',
+                            'onlyDisabled' => 'pim.enhanced_connector.product_reader.enabledCondition.choices.onlyDisabled',
+                            'doNotApply'   => 'pim.enhanced_connector.product_reader.enabledCondition.choices.doNotApply',
                         ]
                     ]
                 ],
-                'completeCriteria' => [
+                'completeCondition' => [
                     'type'    => 'choice',
-                    'required' => true,
                     'options' => [
-                        'help'    => 'akeneo_labs_pim.enhanced_product_export.completeCriteria.help',
-                        'label'   => 'akeneo_labs_pim.enhanced_product_export.completeCriteria.label',
+                        'required' => true,
+                        'select2'  => true,
+                        'help'    => 'pim.enhanced_connector.product_reader.completeCondition.help',
+                        'label'   => 'pim.enhanced_connector.product_reader.completeCondition.label',
                         'choices'  => [
-                            'onlyComplete'       => 'Export only complete products',
-                            'onlyUncomplete'     => 'Export only uncomplete products',
-                            static::DO_NOT_APPLY => 'Export products regardless of their completeness',
+                            'onlyComplete'   => 'pim.enhanced_connector.product_reader.completeCondition.choices.onlyComplete',
+                            'onlyUncomplete' => 'pim.enhanced_connector.product_reader.completeCondition.choices.onlyUncomplete',
+                            'doNotApply'     => 'pim.enhanced_connector.product_reader.completeCondition.choices.doNotApply'
                         ]
                     ]
                 ]
@@ -305,7 +305,7 @@ class ProductReader extends AbstractConfigurableStepElement implements ProductRe
         $this->applyUpdatedFilter($pqb);
         $this->applyEnabledFilter($pqb);
 
-        if (static::DO_NOT_APPLY !== $this->completeCriteria && $this->generateCompleteness) {
+        if ('doNotApply' !== $this->completeCondition && $this->generateCompleteness) {
             $this->completenessManager->generateMissingForChannel($channel);
         }
 
@@ -352,10 +352,10 @@ class ProductReader extends AbstractConfigurableStepElement implements ProductRe
     {
         $updatedDate = null;
 
-        switch ($this->updatedCriteria) {
+        switch ($this->updatedCondition) {
             case "fromDefinedDate":
-                if (null !== $this->updatedFrom) {
-                    $updatedDate = $this->updatedFrom;
+                if (null !== $this->updatedSince) {
+                    $updatedDate = $this->updatedSince;
                 }
                 break;
             case "lastExecutionDate":
@@ -377,7 +377,7 @@ class ProductReader extends AbstractConfigurableStepElement implements ProductRe
     {
         $enabled = null;
 
-        switch ($this->enabledCriteria) {
+        switch ($this->enabledCondition) {
             case "onlyDisabled":
                 $enabled = false;
                 break;
@@ -399,12 +399,12 @@ class ProductReader extends AbstractConfigurableStepElement implements ProductRe
      */
     protected function applyCompleteFilter(ProductQueryBuilder $pqb, Channel $channel)
     {
-        switch ($this->completeCriteria) {
+        switch ($this->completeCondition) {
             case "onlyComplete":
-                $pqb->addFilter('completeness', '=', ['data' => 100, 'scope' => $channel->getCode()]);
+                $pqb->addFilter('completeness', '=', 100, ['scope' => $channel->getCode()]);
                 break;
             case "onlyUncomplete":
-                $pqb->addFilter('completeness', '=', ['data' < 100, 'scope' => $channel->getCode()]);
+                $pqb->addFilter('completeness', '<', 100, ['scope' => $channel->getCode()]);
                 break;
         }
     }
