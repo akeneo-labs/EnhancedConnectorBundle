@@ -1,6 +1,6 @@
 <?php
 
-namespace AkeneoLabs\Pim\Bundle\EnhancedConnectorBundle\Reader;
+namespace Pim\Bundle\EnhancedConnectorBundle\Reader;
 
 use Akeneo\Bundle\BatchBundle\Entity\StepExecution;
 use Akeneo\Bundle\BatchBundle\Item\AbstractConfigurableStepElement;
@@ -243,20 +243,20 @@ class ProductReader extends AbstractConfigurableStepElement implements ProductRe
                     'options' => [
                         'required' => true,
                         'select2'  => true,
-                        'label'   => 'pim.enhanced_connector.product_reader.updatedCondition.label',
-                        'help'    => 'pim.enhanced_connector.product_reader.updatedCondition.help',
+                        'label'   => 'pim_enhanced_connector.product_reader.updatedCondition.label',
+                        'help'    => 'pim_enhanced_connector.product_reader.updatedCondition.help',
                         'choices'  => [
-                            'doNotApply'        => 'pim.enhanced_connector.product_reader.updatedCondition.choices.doNotApply',
-                            'fromDefinedDate'   => 'pim.enhanced_connector.product_reader.updatedCondition.choices.fromDefinedDate',
-                            'fromLastExecution' => 'pim.enhanced_connector.product_reader.updatedCondition.choices.fromLastExecution'
+                            'doNotApply'        => 'pim_enhanced_connector.product_reader.updatedCondition.choices.doNotApply',
+                            'fromDefinedDate'   => 'pim_enhanced_connector.product_reader.updatedCondition.choices.fromDefinedDate',
+                            'fromLastExecution' => 'pim_enhanced_connector.product_reader.updatedCondition.choices.fromLastExecution'
                         ]
                     ]
                 ],
                 'updatedSince' => [
                     'options' => [
                         'required' => false,
-                        'label' => 'pim.enhanced_connector.product_reader.updatedSince.label',
-                        'help'  => 'pim.enhanced_connector.product_reader.updatedSince.help'
+                        'label' => 'pim_enhanced_connector.product_reader.updatedSince.label',
+                        'help'  => 'pim_enhanced_connector.product_reader.updatedSince.help'
                     ]
                 ],
                 'enabledCondition' => [
@@ -264,12 +264,12 @@ class ProductReader extends AbstractConfigurableStepElement implements ProductRe
                     'options' => [
                         'required' => true,
                         'select2'  => true,
-                        'help'    => 'pim.enhanced_connector.product_reader.enabledCondition.help',
-                        'label'   => 'pim.enhanced_connector.product_reader.enabledCondition.label',
+                        'help'    => 'pim_enhanced_connector.product_reader.enabledCondition.help',
+                        'label'   => 'pim_enhanced_connector.product_reader.enabledCondition.label',
                         'choices'  => [
-                            'onlyEnabled'  => 'pim.enhanced_connector.product_reader.enabledCondition.choices.onlyEnabled',
-                            'onlyDisabled' => 'pim.enhanced_connector.product_reader.enabledCondition.choices.onlyDisabled',
-                            'doNotApply'   => 'pim.enhanced_connector.product_reader.enabledCondition.choices.doNotApply',
+                            'onlyEnabled'  => 'pim_enhanced_connector.product_reader.enabledCondition.choices.onlyEnabled',
+                            'onlyDisabled' => 'pim_enhanced_connector.product_reader.enabledCondition.choices.onlyDisabled',
+                            'doNotApply'   => 'pim_enhanced_connector.product_reader.enabledCondition.choices.doNotApply',
                         ]
                     ]
                 ],
@@ -278,12 +278,12 @@ class ProductReader extends AbstractConfigurableStepElement implements ProductRe
                     'options' => [
                         'required' => true,
                         'select2'  => true,
-                        'help'    => 'pim.enhanced_connector.product_reader.completeCondition.help',
-                        'label'   => 'pim.enhanced_connector.product_reader.completeCondition.label',
+                        'help'    => 'pim_enhanced_connector.product_reader.completeCondition.help',
+                        'label'   => 'pim_enhanced_connector.product_reader.completeCondition.label',
                         'choices'  => [
-                            'onlyComplete'   => 'pim.enhanced_connector.product_reader.completeCondition.choices.onlyComplete',
-                            'onlyUncomplete' => 'pim.enhanced_connector.product_reader.completeCondition.choices.onlyUncomplete',
-                            'doNotApply'     => 'pim.enhanced_connector.product_reader.completeCondition.choices.doNotApply'
+                            'onlyComplete'   => 'pim_enhanced_connector.product_reader.completeCondition.choices.onlyComplete',
+                            'onlyUncomplete' => 'pim_enhanced_connector.product_reader.completeCondition.choices.onlyUncomplete',
+                            'doNotApply'     => 'pim_enhanced_connector.product_reader.completeCondition.choices.doNotApply'
                         ]
                     ]
                 ]
@@ -358,13 +358,13 @@ class ProductReader extends AbstractConfigurableStepElement implements ProductRe
                     $updatedDate = $this->updatedSince;
                 }
                 break;
-            case "lastExecutionDate":
+            case "fromLastExecution":
                 $updatedDate = $this->getLastExecutionDate();
                 break;
         }
 
         if (null !== $updatedDate) {
-            $pqb->addFilter('updated', '>=', $updatedDate);
+            $pqb->addFilter('updated', '>', $updatedDate);
         }
     }
 
@@ -401,10 +401,10 @@ class ProductReader extends AbstractConfigurableStepElement implements ProductRe
     {
         switch ($this->completeCondition) {
             case "onlyComplete":
-                $pqb->addFilter('completeness', '=', 100, ['scope' => $channel->getCode()]);
+                $pqb->addFilter('completeness_for_export', '=', 100, ['scope' => $channel->getCode()]);
                 break;
             case "onlyUncomplete":
-                $pqb->addFilter('completeness', '<', 100, ['scope' => $channel->getCode()]);
+                $pqb->addFilter('completeness_for_export', '<', 100, ['scope' => $channel->getCode()]);
                 break;
         }
     }
@@ -425,6 +425,12 @@ class ProductReader extends AbstractConfigurableStepElement implements ProductRe
 
         $query->setParameter('jobInstance', $this->stepExecution->getJobExecution()->getJobInstance());
 
-        return $query->getOneOrNullResult();
+        $lastExecutionDate = $query->getOneOrNullResult();
+
+        if (is_array($lastExecutionDate)) {
+            $lastExecutionDate = new \DateTime(reset($lastExecutionDate));
+        }
+
+        return $lastExecutionDate;
     }
 }

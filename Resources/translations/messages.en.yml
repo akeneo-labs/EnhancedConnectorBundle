@@ -1,5 +1,4 @@
-pim:
-    enhanced_connector:
+pim_enhanced_connector:
         export:
             product:
                 title: Export product using enhanced product reader

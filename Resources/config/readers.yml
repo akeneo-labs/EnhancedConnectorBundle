@@ -1,9 +1,9 @@
 parameters:
-    akeneo_labs.pim.enhanced_connector.reader.product.class: AkeneoLabs\Pim\Bundle\EnhancedConnectorBundle\Reader\ProductReader
+    pim_enhanced_connector.reader.product.class: Pim\Bundle\EnhancedConnectorBundle\Reader\ProductReader
 
 services:
-    akeneo_labs.pim.enhanced_connector.reader.product:
-        class: %akeneo_labs.pim.enhanced_connector.reader.product.class%
+    pim_enhanced_connector.reader.product:
+        class: %pim_enhanced_connector.reader.product.class%
         arguments:
             - '@pim_catalog.query.product_query_builder_factory'
             - '@pim_catalog.manager.channel'

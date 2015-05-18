@@ -2,13 +2,13 @@ connector:
     name: Enhanced Connector
     jobs:
         enhanced_csv_product_export:
-            title: akeneo_labs.pim.enhanced_product_export.title
+            title: pim_enhanced_connector.export.product.title
             type:  export
             steps:
                 export:
-                    title: akeneo_labs.pim.enhanced_connector.export.product.title
+                    title: pim_enhanced_connector.export.product.title
                     services:
-                        reader:    akeneo_labs.pim.enhanced_connector.reader.product
+                        reader:    pim_enhanced_connector.reader.product
                         processor: pim_base_connector.processor.product_to_flat_array
                         writer:    pim_base_connector.writer.file.csv_product
                     parameters:

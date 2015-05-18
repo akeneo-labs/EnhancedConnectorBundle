@@ -1,0 +1,11 @@
+services:
+    pim_enhanced_connector.doctrine.query.filter.date_time:
+        class: %pim_enhanced_connector.doctrine.query.filter.date_time.class%
+        arguments:
+            - @pim_catalog.validator.helper.attribute
+            - ['pim_catalog_datetime']
+            - ['created_time', 'updated_time']
+            - ['=', '<', '>', 'BETWEEN', 'NOT BETWEEN', 'EMPTY']
+        tags:
+            - { name: 'pim_catalog.doctrine.query.filter', priority: 30 }
+
