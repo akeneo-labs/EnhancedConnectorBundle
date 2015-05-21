@@ -11,7 +11,8 @@ use Pim\Bundle\CatalogBundle\Model\AttributeInterface;
 use Pim\Bundle\CatalogBundle\Validator\AttributeValidatorHelper;
 
 /**
- * Override of the date filter to allow the use of the time part
+ * Override of the date filter to allow the use of the time part for the
+ * >= WITH TIME new operator on fields (main used for 'updated' field)
  *
  * @author    Benoit Jacquemont <benoit@akeneo.com>
  * @copyright 2015 Akeneo SAS (http://www.akeneo.com)
@@ -19,45 +20,46 @@ use Pim\Bundle\CatalogBundle\Validator\AttributeValidatorHelper;
  */
 class DateTimeFilter extends DateFilter
 {
-    /**
-     * Override of the method to always get the format from DateTime.
-     *
-     * {@inheritdoc}
-     */
-    protected function getDateLiteralExpr($data, $endOfDay = false)
-    {
-        return $this->qb->expr()->literal($data->format('Y-m-d H:i:s'));
-    }
+    /** @staticvar string */
+    const GREATER_THAN_OR_EQUALS_WITH_TIME = ">= WITH TIME";
 
     /**
-     * Override to always convert to DateTime
-     *
+     * Override to add new operator and to work on time
      * {@inheritdoc}
      */
-    protected function formatSingleValue($type, $value)
+    public function addFieldFilter($field, $operator, $value, $locale = null, $scope = null, $options = [])
     {
-        if (is_string($value)) {
+        if ($value instanceof \DateTime) {
+            $dateTimeValue = $value;
+        } else {
             try {
-                $value = new \DateTime($value);
+                $dateTimeValue = new \DateTime($value);
             } catch (\Exception $e) {
                 throw InvalidArgumentException::expected(
-                    $type,
-                    sprintf('a string with a correct date format (%s)', $e->getMessage()),
+                    $field,
+                    'DateTime object or new DateTime() compatible string. Error:'.$e->getMessage(),
                     'filter',
-                    'date',
-                    $value
+                    'date_time',
+                    is_string($value) ? $value : gettype($value)
                 );
             }
-        } elseif (!$value instanceof \DateTime) {
-            throw InvalidArgumentException::expected(
-                $type,
-                'array with 2 elements, string or \Datetime',
-                'filter',
-                'date',
-                gettype($value)
-            );
         }
 
-        return $value;
+        if (static::GREATER_THAN_OR_EQUALS_WITH_TIME === $operator) {
+            $field = current($this->qb->getRootAliases()) . '.' . $field;
+
+            $utcDateTimeValue = new \DateTime();
+            $utcDateTimeValue->setTimezone(new \DateTimeZone('Etc/UTC'));
+            $utcDateTimeValue->setTimestamp($dateTimeValue->getTimestamp());
+
+            $this->qb->andWhere(
+                $this->qb->expr()->gte(
+                    $field,
+                    $this->qb->expr()->literal($utcDateTimeValue->format('Y-m-d H:i:s'))
+                )
+            );
+        } else {
+            parent::addFieldFilter($field, $operator, $value, $locale, $scope, $options);
+        }
     }
 }

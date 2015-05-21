@@ -4,6 +4,7 @@ namespace Pim\Bundle\EnhancedConnectorBundle\Reader;
 
 use Akeneo\Bundle\BatchBundle\Entity\StepExecution;
 use Akeneo\Bundle\BatchBundle\Item\AbstractConfigurableStepElement;
+use Akeneo\Bundle\BatchBundle\Job\ExitStatus;
 use Doctrine\ORM\EntityManager;
 use Pim\Bundle\BaseConnectorBundle\Reader\ProductReaderInterface;
 use Pim\Bundle\BaseConnectorBundle\Validator\Constraints\Channel as ChannelConstraint;
@@ -54,7 +55,10 @@ class ProductReader extends AbstractConfigurableStepElement implements ProductRe
      */
     protected $updatedCondition;
 
-    /** @var DateTime */
+    /**
+     * @Assert\DateTime(groups={"Execution"})
+     * @var string
+     */
     protected $updatedSince;
 
     /**
@@ -139,11 +143,11 @@ class ProductReader extends AbstractConfigurableStepElement implements ProductRe
     /**
      * Set updated from condition
      *
-     * @param string $updatedSince updatedSince
+     * @param string $updatedSince
      *
      * @return AbstractProcessor
      */
-    public function setUpdatedSince(\DateTime $updatedSince = null)
+    public function setUpdatedSince($updatedSince = null)
     {
         $this->updatedSince = $updatedSince;
 
@@ -364,7 +368,7 @@ class ProductReader extends AbstractConfigurableStepElement implements ProductRe
         }
 
         if (null !== $updatedDate) {
-            $pqb->addFilter('updated', '>', $updatedDate);
+            $pqb->addFilter('updated', '>= WITH TIME', $updatedDate);
         }
     }
 
@@ -410,7 +414,7 @@ class ProductReader extends AbstractConfigurableStepElement implements ProductRe
     }
 
     /**
-     * Get the last execution date for the current job instance
+     * Get the last successful execution date for the current job instance
      *
      * @return \DateTime||null
      */
@@ -418,19 +422,25 @@ class ProductReader extends AbstractConfigurableStepElement implements ProductRe
     {
         $query = $this->entityManager->createQuery(
             sprintf(
-                "SELECT MAX(e.endTime) FROM %s e WHERE e.jobInstance = :jobInstance",
+                "SELECT MAX(e.endTime) FROM %s e WHERE e.jobInstance = :jobInstance AND e.exitCode = :completed",
                 $this->jobExecutionClass
             )
         );
 
         $query->setParameter('jobInstance', $this->stepExecution->getJobExecution()->getJobInstance());
+        $query->setParameter('completed', ExitStatus::COMPLETED);
 
-        $lastExecutionDate = $query->getOneOrNullResult();
+        $utcDateTime = $query->getOneOrNullResult();
 
-        if (is_array($lastExecutionDate)) {
-            $lastExecutionDate = new \DateTime(reset($lastExecutionDate));
+        if (is_array($utcDateTime)) {
+            $utcTimeZone = new \DateTimeZone('Etc/UTC');
+            $utcDateTime = new \DateTime(reset($utcDateTime), $utcTimeZone);
         }
 
-        return $lastExecutionDate;
+        $dateTime = new \DateTime();
+
+        $dateTime->setTimestamp($utcDateTime->getTimestamp());
+
+        return $dateTime;
     }
 }

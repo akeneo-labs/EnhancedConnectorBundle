@@ -1,8 +1,8 @@
 <?php
 
-namespace Pim\Bundle\EnhancedConnector\Doctrine\ORM\Filter;
+namespace Pim\Bundle\EnhancedConnectorBundle\Doctrine\ORM\Filter;
 
-use Pim\Bundle\EnhancedConnector\Doctrine\ORM\Join\CompletenessJoin;
+use Pim\Bundle\EnhancedConnectorBundle\Doctrine\ORM\Join\CompletenessJoin;
 use Pim\Bundle\CatalogBundle\Doctrine\ORM\Filter\CompletenessFilter as BaseCompletenessFilter;
 use Pim\Bundle\CatalogBundle\Exception\InvalidArgumentException;
 use Pim\Bundle\CatalogBundle\Query\Filter\FieldFilterInterface;

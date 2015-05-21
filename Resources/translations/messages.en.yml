@@ -12,7 +12,7 @@ pim_enhanced_connector:
                     doNotApply: Export products regardless of their updated time
             updatedSince:
                 label: Updated since
-                help: Define the minimum updated date to select product
+                help: Define the minimum updated date to select product ('2010-07-31 10:12:30' format)
             enabledCondition:
                 label: Status condition
                 help: Define if and how the status condition will apply on the product selection

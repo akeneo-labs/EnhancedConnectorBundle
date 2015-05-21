@@ -1,6 +1,6 @@
 <?php
 
-namespace Pim\Bundle\EnhancedConnector\Doctrine\ORM\Join;
+namespace Pim\Bundle\EnhancedConnectorBundle\Doctrine\ORM\Join;
 
 use Pim\Bundle\CatalogBundle\Doctrine\ORM\Join\CompletenessJoin as BaseCompletenessJoin;
 
@@ -47,18 +47,16 @@ class CompletenessJoin extends BaseCompletenessJoin
             $joinCondition .= ' AND '.$completenessAlias.'.locale = '.$localeAlias.'.id';
         }
 
-        if (null !== $channel) {
-            $this->qb
-                ->leftJoin(
+        $this->qb
+            ->leftJoin(
                     'PimCatalogBundle:Channel',
                     $channelAlias,
                     'WITH',
                     $channelAlias.'.code = :cScopeCode'
-                )
-                ->setParameter('cScopeCode', $scope);
+                    )
+            ->setParameter('cScopeCode', $scope);
 
-            $joinCondition .= ' AND '.$completenessAlias.'.channel = '.$channelAlias.'.id';
-        }
+        $joinCondition .= ' AND '.$completenessAlias.'.channel = '.$channelAlias.'.id';
 
         $this->qb->leftJoin(
                 $completenessClass,
