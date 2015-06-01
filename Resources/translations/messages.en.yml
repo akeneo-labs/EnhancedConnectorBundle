@@ -1,7 +1,9 @@
 pim_enhanced_connector:
         export:
             product:
-                title: Export product using enhanced product reader
+                title: Export products using enhanced product reader
+            family:
+                title: Export families to CSV
         product_reader:
             updatedCondition:
                 label: Updated time condition

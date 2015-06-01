@@ -1,0 +1,32 @@
+pim_enhanced_connector:
+        export:
+            product:
+                title: Export des products en utilisant le product reader avancé
+            family:
+                title: Export des familles en CSV
+        product_reader:
+            updatedCondition:
+                label: Condition sur date de mise à jour
+                help: Définit si et comment la condition sur la date de mise à jour produit s'applique sur la sélection des produits
+                choices:
+                    fromDefinedDate: Exporte les produits modifiés depuis la date indiquée
+                    fromLastExecution: Exporte les produits modifiés depuis la dernière exécution de ce job
+                    doNotApply: Exporte les produits quelque soit leur date de mise à jour
+            updatedSince:
+                label: Modifiés depuis
+                help: Definit la date plancher de mise à jour produit (format '2010-07-31 10:12:30')
+            enabledCondition:
+                label: Condition sur état
+                help: Définit si et comment la condition sur état s'applique sur la sélection des produits
+                choices:
+                    onlyEnabled: Exporte seulement les produits activés
+                    onlyDisabled: Exporte seulement les produits désactivés
+                    doNotApply: Exporte les produits quelque soit leur état
+            completeCondition:
+                label: Condition sur complétude
+                help: Définit si et comment la condition sur la complétude s'applique à la sélection des produits
+                choices:
+                    onlyComplete: Exporte seulement les produits complets
+                    onlyUncomplete: Exporte seulement produits incomplets
+                    doNotApply: Exporte les produits quelque soit leur complétude
+
