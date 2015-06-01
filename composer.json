@@ -23,7 +23,8 @@
         }
     ],
     "require": {
-        "akeneo/pim-community-dev": "~1.3"
+        "akeneo/pim-community-dev": "~1.3",
+        "herzult/php-ssh": "~1.1"
     },
     "autoload": {
         "psr-0": { "Pim\\Bundle\\EnhancedConnectorBundle\\": "" }

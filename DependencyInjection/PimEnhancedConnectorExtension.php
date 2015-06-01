@@ -24,6 +24,8 @@ class PimEnhancedConnectorExtension extends Extension
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('readers.yml');
         $loader->load('query_builder.yml');
+        $loader->load('writers.yml');
+        $loader->load('services.yml');
 
         $this->loadStorageDriver($container);
     }

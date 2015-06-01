@@ -13,4 +13,15 @@ connector:
                         writer:    pim_base_connector.writer.file.csv_product
                     parameters:
                         batch_size: 10
+        sftp_csv_category_export:
+            title: pim_enhanced_connector.jobs.sftp_csv_category_export.title
+            type:  export
+            steps:
+                export:
+                    title:     pim_base_connector.jobs.csv_category_export.export.title
+                    services:
+                        reader:    pim_base_connector.reader.orm.category
+                        processor: pim_base_connector.processor.csv_serializer.homogeneous
+                        writer:    pim_enhanced_connector.writer.file.sftp
+
 
