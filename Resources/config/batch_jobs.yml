@@ -14,3 +14,13 @@ connector:
                     parameters:
                         batch_size: 10
 
+        csv_family_export:
+            title: pim_enhanced_connector.export.family.title
+            type:  export
+            steps:
+                export:
+                    title:     pim_enhanced_connector.export.family.title
+                    services:
+                        reader:    pim_enhanced_connector.reader.orm.family
+                        processor: pim_base_connector.processor.csv_serializer.homogeneous
+                        writer:    pim_base_connector.writer.file
