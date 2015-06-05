@@ -4,6 +4,9 @@ pim_enhanced_connector:
                 title: Export des products en utilisant le product reader avancé
             family:
                 title: Export des familles en CSV
+            pimgento:
+                family:
+                    title: Export des familles en CSV pour PimGento
         product_reader:
             updatedCondition:
                 label: Condition sur date de mise à jour
