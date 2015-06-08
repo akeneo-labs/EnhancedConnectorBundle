@@ -4,7 +4,10 @@ namespace Pim\Bundle\EnhancedConnectorBundle\Processor;
 
 use Akeneo\Bundle\BatchBundle\Item\AbstractConfigurableStepElement;
 use Akeneo\Bundle\BatchBundle\Item\ItemProcessorInterface;
+use Pim\Bundle\CatalogBundle\Model\LocaleInterface;
+use Pim\Bundle\CatalogBundle\Repository\LocaleRepositoryInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Family to flat array processor.
@@ -15,15 +18,28 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
  */
 class FamilyToFlatArrayProcessor extends AbstractConfigurableStepElement implements ItemProcessorInterface
 {
+    /**
+     * @Assert\NotBlank(groups={"Execution"})
+     * @var string
+     */
+    protected $labelLocale;
+
+    /** @var LocaleRepositoryInterface */
+    protected $localeRepository;
+
     /** @var NormalizerInterface */
     protected $transNormalizer;
 
     /**
-     * @param NormalizerInterface $transNormalizer
+     * @param NormalizerInterface       $transNormalizer
+     * @param LocaleRepositoryInterface $localeRepository
      */
-    public function __construct(NormalizerInterface $transNormalizer)
-    {
-        $this->transNormalizer = $transNormalizer;
+    public function __construct(
+        NormalizerInterface $transNormalizer,
+        LocaleRepositoryInterface $localeRepository
+    ) {
+        $this->transNormalizer  = $transNormalizer;
+        $this->localeRepository = $localeRepository;
     }
 
     /**
@@ -34,11 +50,29 @@ class FamilyToFlatArrayProcessor extends AbstractConfigurableStepElement impleme
         $flatFamily = ['code' => $family->getCode()];
 
         $familyLabels = $this->transNormalizer->normalize($family);
-        foreach ($familyLabels as $locale => $label) {
-            $flatFamily[$locale] = $label;
-        }
+        $flatFamily['label'] = $familyLabels['label'][$this->labelLocale];
 
         return $flatFamily;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLabelLocale()
+    {
+        return $this->labelLocale;
+    }
+
+    /**
+     * @param string $labelLocale
+     *
+     * @return FamilyToFlatArrayProcessor
+     */
+    public function setLabelLocale($labelLocale)
+    {
+        $this->labelLocale = $labelLocale;
+
+        return $this;
     }
 
     /**
@@ -46,6 +80,34 @@ class FamilyToFlatArrayProcessor extends AbstractConfigurableStepElement impleme
      */
     public function getConfigurationFields()
     {
-        return [];
+        return [
+            'labelLocale' => [
+                'type'    => 'choice',
+                'options' => [
+                    'choices'  => $this->getActivatedLocaleChoices(),
+                    'required' => true,
+                    'select2'  => true,
+                    'label'    => 'pim_enhanced_connector.family_processor.locale.label',
+                    'help'     => 'pim_enhanced_connector.family_processor.locale.help',
+                ],
+            ],
+        ];
+    }
+
+    /**
+     * Return a choice list of activated locales.
+     *
+     * @return array
+     */
+    protected function getActivatedLocaleChoices()
+    {
+        $activatedLocaleCodes = $this->localeRepository->getActivatedLocaleCodes();
+
+        $choices = [];
+        foreach ($activatedLocaleCodes as $codes) {
+            $choices[$codes] = $codes;
+        }
+
+        return $choices;
     }
 }
