@@ -111,7 +111,7 @@ class ProductReader extends AbstractConfigurableStepElement implements ProductRe
      *
      * @param string $channel
      *
-     * @return AbstractProcessor
+     * @return ProductReader
      */
     public function setChannel($channel)
     {
@@ -145,7 +145,7 @@ class ProductReader extends AbstractConfigurableStepElement implements ProductRe
      *
      * @param string $updatedSince
      *
-     * @return AbstractProcessor
+     * @return ProductReader
      */
     public function setUpdatedSince($updatedSince = null)
     {
@@ -169,7 +169,7 @@ class ProductReader extends AbstractConfigurableStepElement implements ProductRe
      *
      * @param string $updatedCondition
      *
-     * @return AbstractProcessor
+     * @return ProductReader
      */
     public function setUpdatedCondition($updatedCondition)
     {
@@ -193,7 +193,7 @@ class ProductReader extends AbstractConfigurableStepElement implements ProductRe
      *
      * @param string $enabledCondition
      *
-     * @return AbstractProcessor
+     * @return ProductReader
      */
     public function setEnabledCondition($enabledCondition)
     {
@@ -217,7 +217,7 @@ class ProductReader extends AbstractConfigurableStepElement implements ProductRe
      *
      * @param string $completeCondition
      *
-     * @return AbstractProcessor
+     * @return ProductReader
      */
     public function setCompleteCondition($completeCondition)
     {
