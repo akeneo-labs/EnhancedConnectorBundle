@@ -34,4 +34,8 @@ pim_enhanced_connector:
                     onlyComplete: Export only complete products
                     onlyUncomplete: Export only uncomplete products
                     doNotApply: Export products regardless of their completeness
+        family_processor:
+            locale:
+                label: Label locale
+                help:  Choose in which language you want to export the family label
 
