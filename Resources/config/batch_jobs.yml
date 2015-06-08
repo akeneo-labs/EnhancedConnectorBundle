@@ -33,5 +33,16 @@ connector:
                     title:     pim_enhanced_connector.export.pimgento.family.title
                     services:
                         reader:    pim_enhanced_connector.reader.orm.family
-                        processor: pim_base_connector.processor.family_to_flat_array
+                        processor: pim_enhanced_connector.processor.family_to_flat_array
+                        writer:    pim_base_connector.writer.file.csv
+
+        pimgento_csv_attribute_export:
+            title: pim_enhanced_connector.export.pimgento.attribute.title
+            type:  export
+            steps:
+                export:
+                    title:     pim_enhanced_connector.export.pimgento.attribute.title
+                    services:
+                        reader:    pim_base_connector.reader.orm.attribute
+                        processor: pim_enhanced_connector.processor.attribute_to_flat_array
                         writer:    pim_base_connector.writer.file.csv

@@ -7,6 +7,8 @@ pim_enhanced_connector:
             pimgento:
                 family:
                     title: Export des familles en CSV pour PimGento
+                attribute:
+                    title: Export des attributs en CSV pour PimGento
         product_reader:
             updatedCondition:
                 label: Condition sur date de mise à jour

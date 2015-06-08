@@ -7,7 +7,7 @@ use Akeneo\Bundle\BatchBundle\Item\ItemProcessorInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 /**
- * Class FamilyToFlatArrayProcessor
+ * Family to flat array processor.
  *
  * @author    Damien Carcel <damien.carcel@akeneo.com>
  * @copyright 2015 Akeneo SAS (http://www.akeneo.com)
