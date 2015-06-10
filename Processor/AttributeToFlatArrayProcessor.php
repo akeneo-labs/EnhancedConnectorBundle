@@ -51,7 +51,7 @@ class AttributeToFlatArrayProcessor extends AbstractConfigurableStepElement impl
                 'default_metric_unit'     => $attribute->getDefaultMetricUnit(),
                 'localizable'             => (int) $attribute->isLocalizable(),
                 'scopable'                => (int) $attribute->isScopable(),
-                'family'                  => $this->getAttributeFamilyCodes($attribute),
+                'families'                => $this->getAttributeFamilyCodes($attribute),
             ]
         );
 
