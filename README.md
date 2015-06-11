@@ -30,9 +30,11 @@ Enable the bundle in the `app/AppKernel.php` file, in the `registerBundles` func
 
         return $bundles;
 
-Then clean the cache:
+Then clean the cache and reinstall the assets:
 
     php app/console cache:clear --env=prod
+    
+    php app/console pim:install:assets --env=prod
 
 ## Use of the Enhanced connector bundle with PimGento
 
