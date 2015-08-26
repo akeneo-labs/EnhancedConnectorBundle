@@ -4,11 +4,6 @@ namespace Pim\Bundle\EnhancedConnectorBundle\Doctrine\ORM\Filter;
 
 use Pim\Bundle\CatalogBundle\Doctrine\ORM\Filter\DateFilter;
 use Pim\Bundle\CatalogBundle\Exception\InvalidArgumentException;
-use Pim\Bundle\CatalogBundle\Query\Filter\Operators;
-use Pim\Bundle\CatalogBundle\Query\Filter\AttributeFilterInterface;
-use Pim\Bundle\CatalogBundle\Query\Filter\FieldFilterInterface;
-use Pim\Bundle\CatalogBundle\Model\AttributeInterface;
-use Pim\Bundle\CatalogBundle\Validator\AttributeValidatorHelper;
 
 /**
  * Override of the date filter to allow the use of the time part for the
@@ -29,23 +24,23 @@ class DateTimeFilter extends DateFilter
      */
     public function addFieldFilter($field, $operator, $value, $locale = null, $scope = null, $options = [])
     {
-        if ($value instanceof \DateTime) {
-            $dateTimeValue = $value;
-        } else {
-            try {
-                $dateTimeValue = new \DateTime($value);
-            } catch (\Exception $e) {
-                throw InvalidArgumentException::expected(
-                    $field,
-                    'DateTime object or new DateTime() compatible string. Error:'.$e->getMessage(),
-                    'filter',
-                    'date_time',
-                    is_string($value) ? $value : gettype($value)
-                );
-            }
-        }
-
         if (static::GREATER_THAN_OR_EQUALS_WITH_TIME === $operator) {
+            if ($value instanceof \DateTime) {
+                $dateTimeValue = $value;
+            } else {
+                try {
+                    $dateTimeValue = new \DateTime($value);
+                } catch (\Exception $e) {
+                    throw InvalidArgumentException::expected(
+                        $field,
+                        'DateTime object or new DateTime() compatible string. Error:'.$e->getMessage(),
+                        'filter',
+                        'date_time',
+                        is_string($value) ? $value : gettype($value)
+                    );
+                }
+            }
+
             $field = current($this->qb->getRootAliases()) . '.' . $field;
 
             $utcDateTimeValue = new \DateTime();
