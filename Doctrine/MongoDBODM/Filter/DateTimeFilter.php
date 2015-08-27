@@ -25,23 +25,23 @@ class DateTimeFilter extends DateFilter
      */
     public function addFieldFilter($field, $operator, $value, $locale = null, $scope = null, $options = [])
     {
-        if ($value instanceof \DateTime) {
-            $dateTimeValue = $value;
-        } else {
-            try {
-                $dateTimeValue = new \DateTime($value);
-            } catch (\Exception $e) {
-                throw InvalidArgumentException::expected(
-                    $field,
-                    'DateTime object or new DateTime() compatible string. Error:'.$e->getMessage(),
-                    'filter',
-                    'date_time',
-                    is_string($value) ? $value : gettype($value)
-                );
-            }
-        }
-
         if (static::GREATER_THAN_OR_EQUALS_WITH_TIME === $operator) {
+            if ($value instanceof \DateTime) {
+                $dateTimeValue = $value;
+            } else {
+                try {
+                    $dateTimeValue = new \DateTime($value);
+                } catch (\Exception $e) {
+                    throw InvalidArgumentException::expected(
+                        $field,
+                        'DateTime object or new DateTime() compatible string. Error:'.$e->getMessage(),
+                        'filter',
+                        'date_time',
+                        is_string($value) ? $value : gettype($value)
+                    );
+                }
+            }
+
             $normalizedField = sprintf('%s.%s', ProductQueryUtility::NORMALIZED_FIELD, $field);
             $this->qb->field($normalizedField)->gte($dateTimeValue->getTimestamp());
         } else {
