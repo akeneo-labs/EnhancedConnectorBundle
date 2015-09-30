@@ -13,7 +13,7 @@ However, it does not provide a SSH export as the DnD Magento connector bundle do
 
 ## Requirements
 
- - Akeneo PIM CE or EE 1.3.x stable
+ - Akeneo PIM CE or EE, 1.3.x or 1.4.x stable
 
 ## Installation
 
