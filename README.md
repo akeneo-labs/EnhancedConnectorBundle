@@ -13,7 +13,9 @@ However, it does not provide a SSH export as the DnD Magento connector bundle do
 
 ## Requirements
 
- - Akeneo PIM CE or EE, 1.3.x or 1.4.x stable
+| EnhancedConnectorBundle | Akeneo PIM Community Edition |
+|:-----------------------:|:----------------------------:|
+| v1.0.*                  | v1.3.*, v1.4.*               |
 
 ## Installation
 
@@ -23,12 +25,18 @@ Install the bundle with composer:
 
 If you want to use the development version (only for test purpose, do not use it in production), replace `~1.0` by `dev-master` in the previous command.
 
-Enable the bundle in the `app/AppKernel.php` file, in the `registerBundles` function:
+Enable the bundle in the `app/AppKernel.php` file:
 
-        …
-        $bundles[] = new Pim\Bundle\EnhancedConnectorBundle\PimEnhancedConnectorBundle();
+        public function registerBundles()
+        {
+            $bundles = [
+                new Pim\Bundle\EnhancedConnectorBundle\PimEnhancedConnectorBundle();
+            ]
 
-        return $bundles;
+            ...
+
+            return $bundles;
+        }
 
 Then clean the cache and reinstall the assets:
 
