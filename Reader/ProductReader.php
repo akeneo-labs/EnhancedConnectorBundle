@@ -5,14 +5,15 @@ namespace Pim\Bundle\EnhancedConnectorBundle\Reader;
 use Akeneo\Bundle\BatchBundle\Entity\StepExecution;
 use Akeneo\Bundle\BatchBundle\Item\AbstractConfigurableStepElement;
 use Akeneo\Bundle\BatchBundle\Job\ExitStatus;
+use Akeneo\Component\StorageUtils\Cursor\CursorInterface;
 use Doctrine\ORM\EntityManager;
 use Pim\Bundle\BaseConnectorBundle\Reader\ProductReaderInterface;
 use Pim\Bundle\BaseConnectorBundle\Validator\Constraints\Channel as ChannelConstraint;
-use Pim\Bundle\CatalogBundle\Entity\Channel;
 use Pim\Bundle\CatalogBundle\Manager\ChannelManager;
 use Pim\Bundle\CatalogBundle\Manager\CompletenessManager;
-use Pim\Bundle\CatalogBundle\Query\ProductQueryBuilder;
+use Pim\Bundle\CatalogBundle\Model\ChannelInterface;
 use Pim\Bundle\CatalogBundle\Query\ProductQueryBuilderFactoryInterface;
+use Pim\Bundle\CatalogBundle\Query\ProductQueryBuilderInterface;
 use Pim\Bundle\TransformBundle\Converter\MetricConverter;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -76,7 +77,7 @@ class ProductReader extends AbstractConfigurableStepElement implements ProductRe
     /** @var string */
     protected $jobExecutionClass;
 
-    /** @var Cursor */
+    /** @var CursorInterface */
     protected $products;
 
     /**
@@ -350,9 +351,9 @@ class ProductReader extends AbstractConfigurableStepElement implements ProductRe
     /**
      * Apply updated date filter
      *
-     * @param ProductQueryBuilder $pqb
+     * @param ProductQueryBuilderInterface $pqb
      */
-    protected function applyUpdatedFilter(ProductQueryBuilder $pqb)
+    protected function applyUpdatedFilter(ProductQueryBuilderInterface $pqb)
     {
         $updatedDate = null;
 
@@ -375,9 +376,9 @@ class ProductReader extends AbstractConfigurableStepElement implements ProductRe
     /**
      * Apply enabled filter
      *
-     * @param ProductQueryBuilder $pqb
+     * @param ProductQueryBuilderInterface $pqb
      */
-    protected function applyEnabledFilter(ProductQueryBuilder $pqb)
+    protected function applyEnabledFilter(ProductQueryBuilderInterface $pqb)
     {
         $enabled = null;
 
@@ -398,10 +399,10 @@ class ProductReader extends AbstractConfigurableStepElement implements ProductRe
     /**
      * Apply complete filter
      *
-     * @param ProductQueryBuilder $pqb
-     * @param Channel             $channel
+     * @param ProductQueryBuilderInterface $pqb
+     * @param ChannelInterface             $channel
      */
-    protected function applyCompleteFilter(ProductQueryBuilder $pqb, Channel $channel)
+    protected function applyCompleteFilter(ProductQueryBuilderInterface $pqb, ChannelInterface $channel)
     {
         switch ($this->completeCondition) {
             case "onlyComplete":
