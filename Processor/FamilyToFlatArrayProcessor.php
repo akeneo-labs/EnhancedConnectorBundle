@@ -50,7 +50,11 @@ class FamilyToFlatArrayProcessor extends AbstractConfigurableStepElement impleme
         $flatFamily = ['code' => $family->getCode()];
 
         $familyLabels = $this->transNormalizer->normalize($family);
-        $flatFamily['label'] = $familyLabels['label'][$this->labelLocale];
+        if (!empty($familyLabels['label'])) {
+            $flatFamily['label'] = $familyLabels['label'][$this->labelLocale];
+        } else {
+            $flatFamily['label'] = sprintf('[%s]', $family->getCode());
+        }
 
         return $flatFamily;
     }
