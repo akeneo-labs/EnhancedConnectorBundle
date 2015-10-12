@@ -70,8 +70,10 @@ class AttributeToFlatArrayProcessor extends AbstractConfigurableStepElement impl
         $families = $attribute->getFamilies();
 
         $familyCodes = [];
-        foreach ($families as $family) {
-            $familyCodes[] = $family->getCode();
+        if (null !== $families) {
+            foreach ($families as $family) {
+                $familyCodes[] = $family->getCode();
+            }
         }
 
         return implode(self::ITEM_SEPARATOR, $familyCodes);
