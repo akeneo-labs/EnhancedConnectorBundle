@@ -39,3 +39,10 @@ pim_enhanced_connector:
                 label: Label locale
                 help:  Choose in which language you want to export the family label
 
+doNotApply: N/A
+fromDefinedDate: Export products updated since the defined date
+fromLastExecution: Export products updated since the last execution of this job
+onlyEnabled: Export only enabled products
+onlyDisabled: Export only disabled products
+onlyComplete: Export only complete products
+onlyUncomplete: Export only uncomplete products
