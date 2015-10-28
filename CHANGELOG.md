@@ -1,3 +1,8 @@
+# 1.0.3 (2015-10-28)
+## Bug fixes
+ECB-3: Attribute labels are tranlated and exported to PimGento only for active locales
+ECB-4: Add missing translations on enhanced product export display
+
 # 1.0.2 (2015-10-12)
 ## Bug fix
 - Correct a bug that prevents family export to PimGento if no label is filled

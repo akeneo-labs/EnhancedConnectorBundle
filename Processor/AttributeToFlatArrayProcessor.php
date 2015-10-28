@@ -4,6 +4,7 @@ namespace Pim\Bundle\EnhancedConnectorBundle\Processor;
 
 use Akeneo\Bundle\BatchBundle\Item\AbstractConfigurableStepElement;
 use Akeneo\Bundle\BatchBundle\Item\ItemProcessorInterface;
+use Pim\Bundle\CatalogBundle\Manager\LocaleManager;
 use Pim\Bundle\CatalogBundle\Model\AttributeInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
@@ -19,15 +20,20 @@ class AttributeToFlatArrayProcessor extends AbstractConfigurableStepElement impl
     /** @staticvar string */
     const ITEM_SEPARATOR = ',';
 
+    /** @var LocaleManager */
+    protected $localeManager;
+
     /** @var NormalizerInterface */
     protected $transNormalizer;
 
     /**
      * @param NormalizerInterface $transNormalizer
+     * @param LocaleManager       $localeManager
      */
-    public function __construct(NormalizerInterface $transNormalizer)
+    public function __construct(NormalizerInterface $transNormalizer, LocaleManager $localeManager)
     {
         $this->transNormalizer = $transNormalizer;
+        $this->localeManager   = $localeManager;
     }
 
     /**
@@ -35,10 +41,14 @@ class AttributeToFlatArrayProcessor extends AbstractConfigurableStepElement impl
      */
     public function process($attribute)
     {
+        $context = [
+            'locales' => $this->localeManager->getActiveCodes(),
+        ];
+
         $flatAttribute = [
                 'type' => $attribute->getAttributeType(),
                 'code' => $attribute->getCode()
-            ] + $this->transNormalizer->normalize($attribute);
+            ] + $this->transNormalizer->normalize($attribute, null, $context);
 
         $flatAttribute = array_merge(
             $flatAttribute,
