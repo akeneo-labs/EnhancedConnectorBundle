@@ -30,7 +30,7 @@ Enable the bundle in the `app/AppKernel.php` file:
         public function registerBundles()
         {
             $bundles = [
-                new Pim\Bundle\EnhancedConnectorBundle\PimEnhancedConnectorBundle();
+                new Pim\Bundle\EnhancedConnectorBundle\PimEnhancedConnectorBundle()
             ]
 
             ...
