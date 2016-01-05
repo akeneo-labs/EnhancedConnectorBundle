@@ -1,6 +1,7 @@
 parameters:
     pim_enhanced_connector.processor.family_to_flat_array.class:    Pim\Bundle\EnhancedConnectorBundle\Processor\FamilyToFlatArrayProcessor
     pim_enhanced_connector.processor.attribute_to_flat_array.class: Pim\Bundle\EnhancedConnectorBundle\Processor\AttributeToFlatArrayProcessor
+    pim_enhanced_connector.processor.product_to_flat_array.class:   Pim\Bundle\EnhancedConnectorBundle\Processor\ProductToFlatArrayProcessor
 
 services:
     pim_enhanced_connector.processor.family_to_flat_array:
@@ -14,3 +15,12 @@ services:
         arguments:
             - '@pim_serializer.normalizer.flat.label_translation'
             - '@pim_catalog.repository.locale'
+
+    pim_enhanced_connector.processor.product_to_flat_array:
+        class: %pim_enhanced_connector.processor.product_to_flat_array.class%
+        arguments:
+            - '@pim_serializer'
+            - '@pim_catalog.manager.channel'
+            - '@pim_catalog.repository.attribute_group'
+            - '@pim_catalog.repository.association_type'
+            - ['pim_catalog_file', 'pim_catalog_image']

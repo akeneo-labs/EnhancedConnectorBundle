@@ -45,6 +45,13 @@ pim_enhanced_connector:
             locale:
                 label: Label locale
                 help:  Choose in which language you want to export the family label
+        product_processor:
+            attributes_to_exclude:
+                label: Attributes to exclude
+                help: List of the attributes you want to exclude from the export
+            associations_to_exclude:
+                label: Associations to exclude
+                help: List of the associations you want to exclude from the export
 
 doNotApply: N/A
 fromDefinedDate: Export products updated since the defined date

@@ -9,7 +9,7 @@ connector:
                     title: pim_enhanced_connector.export.product.title
                     services:
                         reader:    pim_enhanced_connector.reader.product
-                        processor: pim_base_connector.processor.product_to_flat_array
+                        processor: pim_enhanced_connector.processor.product_to_flat_array
                         writer:    pim_base_connector.writer.file.csv_product
                     parameters:
                         batch_size: 10
