@@ -13,7 +13,12 @@ use Pim\Bundle\CatalogBundle\Manager\ChannelManager;
 use Pim\Bundle\CatalogBundle\Model\ProductValueInterface;
 use Symfony\Component\Serializer\Serializer;
 
-
+/**
+ * Class ProductToFlatArrayProcessor
+ *
+ * @author  Synolia
+ * @package Pim\Bundle\EnhancedConnectorBundle\Processor
+ */
 class ProductToFlatArrayProcessor extends ProductToFlatArray implements ItemProcessorInterface
 {
     /** @var array */

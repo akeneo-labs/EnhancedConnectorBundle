@@ -1,0 +1,11 @@
+parameters:
+    pim_enhanced_connector.twig.normalize_configuration_extension.class:  Pim\Bundle\EnhancedConnectorBundle\Twig\NormalizeConfigurationExtension
+
+services:
+    pim_enhanced_connector.twig.normalize_configuration_extension:
+        parent: pim_import_export.twig.normalize_configuration_extension
+        class: %pim_enhanced_connector.twig.normalize_configuration_extension.class%
+        arguments:
+            - '@translator'
+        tags:
+            - { name: twig.extension }

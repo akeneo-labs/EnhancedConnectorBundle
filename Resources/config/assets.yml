@@ -1,0 +1,3 @@
+css:
+    pim_enhanced_connector:
+        - bundles/pimenhancedconnector/css/select2.multiselect.groups.css

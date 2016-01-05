@@ -1,0 +1,18 @@
+.select2-results-dept-0.select2-result-with-children>.select2-result-label:hover {
+    background-color: #8e3bc4;
+    color: #fff;
+}
+
+.select2-results-dept-0.select2-result-with-children.select2-selected {
+    display: list-item;
+}
+
+.select2-result-label>.icon-remove {
+    float: right;
+    position: relative;
+    font-size: 12px;
+}
+
+.select2-result-label>.icon-remove:hover {
+    color: #592288;
+}

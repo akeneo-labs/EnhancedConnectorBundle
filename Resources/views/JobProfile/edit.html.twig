@@ -1,0 +1,34 @@
+{% extends 'PimImportExportBundle:JobProfile:edit.html.twig' %}
+
+{% oro_title_set({ params: {"%job.label%": form.vars.value.label } }) %}
+
+{% set actionRoute = path('pim_importexport_export_profile_edit', { 'id': form.vars.value.id }) %}
+
+{% set entityName = 'export profile' %}
+{% set title = (entityName ~'.edit')|trans ~ ' - ' ~ form.vars.value.label %}
+
+{% set indexRoute = path('pim_importexport_export_profile_index') %}
+{% if form.vars.value.id %}
+    {% set removeAcl = 'pim_importexport_export_profile_remove' %}
+    {% set removeRoute = path('pim_importexport_export_profile_remove', { 'id': form.vars.value.id }) %}
+    {% set importRoute = path('pim_importexport_export_profile_index') %}
+    {% set removeMessage = 'confirmation.remove.export profile'|trans({ '%name%': form.vars.value.label }) %}
+    {% set removeSuccessMessage = 'flash.export.removed'|trans %}
+{% endif %}
+
+{% block content %}
+
+    {{ parent() }}
+    <script type="application/javascript">
+        require(
+            ['jquery', 'pim/enhanced_connector/select2.multiselect.groups'],
+            function ($, multiselectGroups) {
+                'use strict';
+                $(function () {
+                    multiselectGroups.initialize();
+                });
+            }
+        );
+    </script>
+
+{%  endblock content %}
