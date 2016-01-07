@@ -74,6 +74,6 @@ You need to choose which in which language you want to export the family label, 
 
 Like with the standard product export, you need to define a channel to export from, as your products could be different from a channel to another.
 
-However, the standard product export allows only to export complete and enable products. The enhanced export allows you to chose if you want to export only enable, only disable or both, and only complete, only incomplete or both.
+However, the standard product export allows only to export complete, enable and categorized products. The enhanced export allows you to chose if you want to export only enable, only disable or both, only complete, only incomplete or both, and finaly only categorized, only uncategorized or both.
 
 You can also choose to export the products updated since the last time you run the job, since a precise date that you give in the configuration, or regardless of their last update (i.e. all the products).
