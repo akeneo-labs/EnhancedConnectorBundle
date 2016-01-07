@@ -72,6 +72,12 @@ class ProductReader extends AbstractConfigurableStepElement implements ProductRe
      * @Assert\NotBlank(groups={"Execution"})
      * @var string
      */
+    protected $categorizationCondition;
+
+    /**
+     * @Assert\NotBlank(groups={"Execution"})
+     * @var string
+     */
     protected $completeCondition;
 
     /** @var string */
@@ -180,6 +186,28 @@ class ProductReader extends AbstractConfigurableStepElement implements ProductRe
     }
 
     /**
+     * @return string
+     */
+    public function getCategorizationCondition()
+    {
+        return $this->categorizationCondition;
+    }
+
+    /**
+     * Sets categorization condition
+     *
+     * @param string $categorizationCondition
+     *
+     * @return ProductReader
+     */
+    public function setCategorizationCondition($categorizationCondition)
+    {
+        $this->categorizationCondition = $categorizationCondition;
+
+        return $this;
+    }
+
+    /**
      * Get enabled condition
      *
      * @return string
@@ -278,6 +306,20 @@ class ProductReader extends AbstractConfigurableStepElement implements ProductRe
                         ]
                     ]
                 ],
+                'categorizationCondition' => [
+                    'type'    => 'choice',
+                    'options' => [
+                        'required' => true,
+                        'select2'  => true,
+                        'help'    => 'pim_enhanced_connector.product_reader.categorizationCondition.help',
+                        'label'   => 'pim_enhanced_connector.product_reader.categorizationCondition.label',
+                        'choices'  => [
+                            'onlyCategorized'  => 'pim_enhanced_connector.product_reader.categorizationCondition.choices.onlyCategorized',
+                            'onlyNonCategorized' => 'pim_enhanced_connector.product_reader.categorizationCondition.choices.onlyNonCategorized',
+                            'doNotApply'   => 'pim_enhanced_connector.product_reader.categorizationCondition.choices.doNotApply',
+                        ]
+                    ]
+                ],
                 'completeCondition' => [
                     'type'    => 'choice',
                     'options' => [
@@ -305,8 +347,7 @@ class ProductReader extends AbstractConfigurableStepElement implements ProductRe
 
         $pqb = $this->pqbFactory->create(['default_scope' => $channel->getCode()]);
 
-        $pqb->addFilter('categories.id', 'IN CHILDREN', [$channel->getCategory()->getId()]);
-
+        $this->applyCategorizationFilter($pqb, $channel);
         $this->applyUpdatedFilter($pqb);
         $this->applyEnabledFilter($pqb);
 
@@ -349,7 +390,7 @@ class ProductReader extends AbstractConfigurableStepElement implements ProductRe
     }
 
     /**
-     * Apply updated date filter
+     * Applies updated date filter
      *
      * @param ProductQueryBuilderInterface $pqb
      */
@@ -374,7 +415,7 @@ class ProductReader extends AbstractConfigurableStepElement implements ProductRe
     }
 
     /**
-     * Apply enabled filter
+     * Applies enabled filter
      *
      * @param ProductQueryBuilderInterface $pqb
      */
@@ -397,7 +438,7 @@ class ProductReader extends AbstractConfigurableStepElement implements ProductRe
     }
 
     /**
-     * Apply complete filter
+     * Applies complete filter
      *
      * @param ProductQueryBuilderInterface $pqb
      * @param ChannelInterface             $channel
@@ -410,6 +451,24 @@ class ProductReader extends AbstractConfigurableStepElement implements ProductRe
                 break;
             case "onlyUncomplete":
                 $pqb->addFilter('completeness_for_export', '<', 100, ['scope' => $channel->getCode()]);
+                break;
+        }
+    }
+
+    /**
+     * Applies categorization filter
+     *
+     * @param ProductQueryBuilderInterface $pqb
+     * @param ChannelInterface             $channel
+     */
+    protected function applyCategorizationFilter(ProductQueryBuilderInterface $pqb, ChannelInterface $channel)
+    {
+        switch($this->categorizationCondition) {
+            case "onlyCategorized":
+                $pqb->addFilter('categories.id', 'IN CHILDREN', [$channel->getCategory()->getId()]);
+                break;
+            case "onlyNonCategorized":
+                $pqb->addFilter('categories.id', 'UNCLASSIFIED', []);
                 break;
         }
     }
