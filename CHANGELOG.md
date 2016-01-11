@@ -1,5 +1,9 @@
+# 1.0.5 (2016-01-11)
+## Bug fix:
+- ECB-6: Detach products once processed to avoid memory leak:wq
+
 # 1.0.4 (2016-01-07)
-## New featiure
+## New feature
 - ECB-5: Add a new option to export categorized and/or uncategorized products
 
 # 1.0.3 (2015-10-28)
