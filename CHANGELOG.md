@@ -1,6 +1,6 @@
 # 1.0.5 (2016-01-11)
 ## Bug fix:
-- ECB-6: Detach products once processed to avoid memory leak:wq
+- ECB-6: Detach products once processed to avoid memory leak
 
 # 1.0.4 (2016-01-07)
 ## New feature
