@@ -7,9 +7,8 @@ use Akeneo\Bundle\BatchBundle\Item\ItemProcessorInterface;
 use Pim\Bundle\BaseConnectorBundle\Processor\ProductToFlatArrayProcessor as ProductToFlatArray;
 use Pim\Bundle\CatalogBundle\Doctrine\ORM\Repository\AssociationTypeRepository;
 use Pim\Bundle\CatalogBundle\Doctrine\ORM\Repository\AttributeGroupRepository;
-use Pim\Bundle\CatalogBundle\Entity\AssociationType;
-use Pim\Bundle\CatalogBundle\Entity\AttributeGroup;
 use Pim\Bundle\CatalogBundle\Manager\ChannelManager;
+use Pim\Bundle\CatalogBundle\Model\ProductInterface;
 use Pim\Bundle\CatalogBundle\Model\ProductValueInterface;
 use Symfony\Component\Serializer\Serializer;
 
@@ -25,7 +24,7 @@ class ProductToFlatArrayProcessor extends ProductToFlatArray implements ItemProc
     protected $attributesToExclude;
 
     /** @var  array */
-    protected $associationsToExclude;
+    protected $associationTypesToExclude;
 
     /** @var  AttributeGroupRepository */
     protected $attributeGroupRepository;
@@ -58,23 +57,21 @@ class ProductToFlatArrayProcessor extends ProductToFlatArray implements ItemProc
      */
     public function process($product)
     {
-        $data = [
-            'media'     => [],
-            'product'   => []
-        ];
+        $data = parent::process($product);
 
-        $mediaValues = $this->filterMediaValues($this->getMediaProductValues($product));
+        $data['product'] = $this->filterValues($data['product']);
 
-        foreach ($mediaValues as $mediaValue) {
-            $data['media'][] = $this->serializer->normalize(
-                $mediaValue->getMedia(),
-                'flat',
-                ['field_name' => 'media', 'prepare_copy' => true, 'value' => $mediaValue]
-            );
-        }
-
-        $data['product'] = $this->filterValues($this->serializer->normalize($product, 'flat', $this->getNormalizerContext()));
         return $data;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getMediaProductValues(ProductInterface $product)
+    {
+        $values = parent::getMediaProductValues($product);
+
+        return $this->filterMediaValues($values);
     }
 
     /**
@@ -93,14 +90,14 @@ class ProductToFlatArrayProcessor extends ProductToFlatArray implements ItemProc
                     'help'      => 'pim_enhanced_connector.product_processor.attributes_to_exclude.help'
                 ]
             ],
-            'associationsToExclude' => [
+            'associationTypesToExclude' => [
                 'type'      => 'choice',
                 'options'   => [
-                    'choices'   => $this->getAssociationList(),
+                    'choices'   => $this->getAssociationTypeList(),
                     'select2'   => true,
                     'multiple'  => true,
-                    'label'     => 'pim_enhanced_connector.product_processor.associations_to_exclude.label',
-                    'help'      => 'pim_enhanced_connector.product_processor.associations_to_exclude.help'
+                    'label'     => 'pim_enhanced_connector.product_processor.association_types_to_exclude.label',
+                    'help'      => 'pim_enhanced_connector.product_processor.association_types_to_exclude.help'
                 ]
             ]
         ];
@@ -128,19 +125,19 @@ class ProductToFlatArrayProcessor extends ProductToFlatArray implements ItemProc
     /**
      * @return array
      */
-    public function getAssociationsToExclude()
+    public function getAssociationTypesToExclude()
     {
-        return $this->associationsToExclude;
+        return $this->associationTypesToExclude;
     }
 
     /**
-     * @param array $associationsToExclude
+     * @param array $associationTypesToExclude
      *
      * @return ProductToFlatArrayProcessor
      */
-    public function setAssociationsToExclude($associationsToExclude)
+    public function setAssociationTypesToExclude($associationTypesToExclude)
     {
-        $this->associationsToExclude = $associationsToExclude;
+        $this->associationTypesToExclude = $associationTypesToExclude;
         return $this;
     }
 
@@ -155,7 +152,6 @@ class ProductToFlatArrayProcessor extends ProductToFlatArray implements ItemProc
 
         $results = array();
         foreach ($attributeGroups as $attributeGroup) {
-            /** @var AttributeGroup $attributeGroup */
             $attributes = $attributeGroup->getAttributes();
             if (!$attributes->isEmpty()) {
                 $results[$attributeGroup->getLabel()] = array();
@@ -169,17 +165,16 @@ class ProductToFlatArrayProcessor extends ProductToFlatArray implements ItemProc
     }
 
     /**
-     * Gets the list of all existing associations
+     * Gets the list of all existing association types
      *
      * @return array
      */
-    protected function getAssociationList()
+    protected function getAssociationTypeList()
     {
         $results            = array();
         $associationTypes   = $this->associationTypeRepository->findAll();
 
         foreach ($associationTypes as $associationType) {
-            /** @var AssociationType $associationType */
             $results[$associationType->getCode()] = $associationType->getLabel();
         }
 
@@ -187,7 +182,7 @@ class ProductToFlatArrayProcessor extends ProductToFlatArray implements ItemProc
     }
 
     /**
-     * Filters attributes and associations
+     * Filters attributes and association types
      *
      * @param array $values
      *
@@ -196,7 +191,7 @@ class ProductToFlatArrayProcessor extends ProductToFlatArray implements ItemProc
     protected function filterValues($values)
     {
         $keys       = array_keys($values);
-        $toExclude  = array_merge($this->attributesToExclude, $this->associationsToExclude);
+        $toExclude  = array_merge($this->attributesToExclude, $this->associationTypesToExclude);
 
         foreach ($toExclude as $attribute) {
             /*

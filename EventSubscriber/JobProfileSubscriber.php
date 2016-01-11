@@ -28,11 +28,10 @@ class JobProfileSubscriber implements EventSubscriberInterface
      *
      * @param GenericEvent $event
      */
-    public function onPostEdit($event)
+    public function onPostEdit(GenericEvent $event)
     {
         $jobInstance = $event->getSubject();
 
-        /** @var JobInstance $jobInstance */
         if ($jobInstance->getType() == JobInstance::TYPE_EXPORT) {
             $jobInstance->getJob()->setEditTemplate('PimEnhancedConnectorBundle:JobProfile:edit.html.twig');
         }

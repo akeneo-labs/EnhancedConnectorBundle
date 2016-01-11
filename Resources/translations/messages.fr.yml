@@ -48,10 +48,10 @@ pim_enhanced_connector:
         product_processor:
             attributes_to_exclude:
                 label: Attributs à exclure
-                help: Liste des attributes ne devant pas figurer dans l'export
-            associations_to_exclude:
-                label: Associations à exclure
-                help: Liste des associations ne devant pas figurer dans l'export
+                help: Liste des attributs ne devant pas figurer dans l'export
+            association_types_to_exclude:
+                label: Types d'association à exclure
+                help: Liste des types d'association ne devant pas figurer dans l'export
 
 doNotApply: N/A
 fromDefinedDate: Exporte les produits modifiés depuis la date indiquée

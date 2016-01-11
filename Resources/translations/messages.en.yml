@@ -49,9 +49,9 @@ pim_enhanced_connector:
             attributes_to_exclude:
                 label: Attributes to exclude
                 help: List of the attributes you want to exclude from the export
-            associations_to_exclude:
-                label: Associations to exclude
-                help: List of the associations you want to exclude from the export
+            association_types_to_exclude:
+                label: Association types to exclude
+                help: List of the association types you want to exclude from the export
 
 doNotApply: N/A
 fromDefinedDate: Export products updated since the defined date
