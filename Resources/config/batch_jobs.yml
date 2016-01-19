@@ -13,6 +13,8 @@ connector:
                         writer:    pim_base_connector.writer.file.csv_product
                     parameters:
                         batch_size: 10
+            templates:
+                edit: PimEnhancedConnectorBundle:JobProfile:edit.html.twig
 
         pimgento_csv_family_export:
             title: pim_enhanced_connector.export.pimgento.family.title

@@ -1,5 +1,0 @@
-services:
-    pim_enhanced_connector.job_profile_subscriber:
-        class: Pim\Bundle\EnhancedConnectorBundle\EventSubscriber\JobProfileSubscriber
-        tags:
-            - { name: kernel.event_subscriber }
