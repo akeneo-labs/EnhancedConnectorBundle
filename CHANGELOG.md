@@ -1,3 +1,8 @@
+# 1.1 - current
+
+# Bug fix
+- ECB-7: diverted from 1.3 branch where a BC break was fixed
+
 # 1.0.5 (2016-01-11)
 ## Bug fix:
 - ECB-6: Detach products once processed to avoid memory leak
