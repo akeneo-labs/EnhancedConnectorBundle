@@ -1,6 +1,6 @@
 # 1.0.6 - current
 ## Bug fix
-- ECB-7: this bundle works again with 1.3.X PIM
+- ECB-7: this bundle works again with 1.3.X PIM, an earlier change was only compatible with 1.4.X
 
 # 1.0.5 (2016-01-11)
 ## Bug fix:
