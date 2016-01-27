@@ -1,3 +1,7 @@
+# 1.0.6 - current
+## Bug fix
+- ECB-7: this bundle works again with 1.3.X PIM
+
 # 1.0.5 (2016-01-11)
 ## Bug fix:
 - ECB-6: Detach products once processed to avoid memory leak:wq
