@@ -1,4 +1,4 @@
-# 1.1 - current
+# 1.1 - (2016-01-28)
 
 # Bug fix
 - ECB-7: diverted from 1.3 branch where a BC break was fixed
