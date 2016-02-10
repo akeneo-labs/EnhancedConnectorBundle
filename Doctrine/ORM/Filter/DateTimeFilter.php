@@ -3,7 +3,7 @@
 namespace Pim\Bundle\EnhancedConnectorBundle\Doctrine\ORM\Filter;
 
 use Pim\Bundle\CatalogBundle\Doctrine\ORM\Filter\DateFilter;
-use Pim\Bundle\CatalogBundle\Exception\InvalidArgumentException;
+use Pim\Component\Catalog\Exception\InvalidArgumentException;
 
 /**
  * Override of the date filter to allow the use of the time part for the

@@ -14,7 +14,7 @@ services:
         class: %pim_enhanced_connector.processor.attribute_to_flat_array.class%
         arguments:
             - '@pim_serializer.normalizer.flat.label_translation'
-            - '@pim_catalog.manager.locale'
+            - '@pim_catalog.repository.locale'
 
     pim_enhanced_connector.processor.product_to_flat_array:
         class:  %pim_enhanced_connector.processor.product_to_flat_array.class%

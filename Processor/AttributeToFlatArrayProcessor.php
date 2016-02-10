@@ -2,10 +2,10 @@
 
 namespace Pim\Bundle\EnhancedConnectorBundle\Processor;
 
-use Akeneo\Bundle\BatchBundle\Item\AbstractConfigurableStepElement;
-use Akeneo\Bundle\BatchBundle\Item\ItemProcessorInterface;
-use Pim\Bundle\CatalogBundle\Manager\LocaleManager;
-use Pim\Bundle\CatalogBundle\Model\AttributeInterface;
+use Akeneo\Component\Batch\Item\AbstractConfigurableStepElement;
+use Akeneo\Component\Batch\Item\ItemProcessorInterface;
+use Pim\Component\Catalog\Repository\LocaleRepositoryInterface;
+use Pim\Component\Catalog\Model\AttributeInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 /**
@@ -20,17 +20,17 @@ class AttributeToFlatArrayProcessor extends AbstractConfigurableStepElement impl
     /** @staticvar string */
     const ITEM_SEPARATOR = ',';
 
-    /** @var LocaleManager */
+    /** @var LocaleRepositoryInterface */
     protected $localeManager;
 
     /** @var NormalizerInterface */
     protected $transNormalizer;
 
     /**
-     * @param NormalizerInterface $transNormalizer
-     * @param LocaleManager       $localeManager
+     * @param NormalizerInterface       $transNormalizer
+     * @param LocaleRepositoryInterface $localeManager
      */
-    public function __construct(NormalizerInterface $transNormalizer, LocaleManager $localeManager)
+    public function __construct(NormalizerInterface $transNormalizer, LocaleRepositoryInterface $localeManager)
     {
         $this->transNormalizer = $transNormalizer;
         $this->localeManager   = $localeManager;
@@ -42,7 +42,7 @@ class AttributeToFlatArrayProcessor extends AbstractConfigurableStepElement impl
     public function process($attribute)
     {
         $context = [
-            'locales' => $this->localeManager->getActiveCodes(),
+            'locales' => $this->localeManager->getActivatedLocaleCodes(),
         ];
 
         $flatAttribute = [

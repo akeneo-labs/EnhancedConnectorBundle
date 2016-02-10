@@ -4,7 +4,7 @@ namespace Pim\Bundle\EnhancedConnectorBundle\Doctrine\MongoDBODM\Filter;
 
 use Pim\Bundle\CatalogBundle\Doctrine\MongoDBODM\ProductQueryUtility;
 use Pim\Bundle\CatalogBundle\Doctrine\MongoDBODM\Filter\CompletenessFilter as BaseCompletenessFilter;
-use Pim\Bundle\CatalogBundle\Exception\InvalidArgumentException;
+use Pim\Component\Catalog\Exception\InvalidArgumentException;
 use Pim\Bundle\CatalogBundle\Query\Filter\Operators;
 use Pim\Bundle\CatalogBundle\Manager\ChannelManager;
 

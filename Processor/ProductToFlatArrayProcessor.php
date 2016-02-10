@@ -4,7 +4,7 @@ namespace Pim\Bundle\EnhancedConnectorBundle\Processor;
 
 use Akeneo\Component\StorageUtils\Detacher\ObjectDetacherInterface;
 use Pim\Bundle\BaseConnectorBundle\Processor\ProductToFlatArrayProcessor as BaseProductToFlatArrayProcessor;
-use Pim\Bundle\CatalogBundle\Builder\ProductBuilderInterface;
+use Pim\Component\Catalog\Builder\ProductBuilderInterface;
 use Pim\Bundle\CatalogBundle\Manager\ChannelManager;
 use Symfony\Component\Serializer\Serializer;
 
@@ -23,18 +23,22 @@ class ProductToFlatArrayProcessor extends BaseProductToFlatArrayProcessor
     /**
      * @param Serializer                   $serializer
      * @param ChannelManager               $channelManager
+     * @param ProductBuilderInterface      $productBuilder
      * @param array                        $mediaAttributeTypes
-     * @param ProductBuilderInterface|null $productBuilder
+     * @param array                        $decimalSeparators
+     * @param array                        $dateFormats
      * @param ObjectDetacherInterface|null $objectDetacher
      */
     public function __construct(
         Serializer $serializer,
         ChannelManager $channelManager,
+        ProductBuilderInterface $productBuilder,
         array $mediaAttributeTypes,
-        ProductBuilderInterface $productBuilder = null,
+        array $decimalSeparators,
+        array $dateFormats,
         ObjectDetacherInterface $objectDetacher = null
     ) {
-        parent::__construct($serializer, $channelManager, $mediaAttributeTypes, $productBuilder);
+        parent::__construct($serializer, $channelManager, $productBuilder, $mediaAttributeTypes, $decimalSeparators, $dateFormats);
 
         $this->objectDetacher = $objectDetacher;
     }
