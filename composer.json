@@ -23,7 +23,7 @@
         }
     ],
     "require": {
-        "akeneo/pim-community-dev": "1.4.*",
+        "akeneo/pim-community-dev": "1.5.*",
 	"doctrine/migrations": "1.0.0-alpha3@alpha"
     },
     "require-dev": {
