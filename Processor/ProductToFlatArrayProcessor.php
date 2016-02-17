@@ -38,7 +38,14 @@ class ProductToFlatArrayProcessor extends BaseProductToFlatArrayProcessor
         array $dateFormats,
         ObjectDetacherInterface $objectDetacher = null
     ) {
-        parent::__construct($serializer, $channelManager, $productBuilder, $mediaAttributeTypes, $decimalSeparators, $dateFormats);
+        parent::__construct(
+            $serializer,
+            $channelManager,
+            $productBuilder,
+            $mediaAttributeTypes,
+            $decimalSeparators,
+            $dateFormats
+        );
 
         $this->objectDetacher = $objectDetacher;
     }

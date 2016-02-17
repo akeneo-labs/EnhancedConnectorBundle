@@ -4,7 +4,6 @@ namespace Pim\Bundle\EnhancedConnectorBundle\Processor;
 
 use Akeneo\Component\Batch\Item\AbstractConfigurableStepElement;
 use Akeneo\Component\Batch\Item\ItemProcessorInterface;
-use Pim\Component\Catalog\Model\LocaleInterface;
 use Pim\Component\Catalog\Repository\LocaleRepositoryInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -20,6 +19,7 @@ class FamilyToFlatArrayProcessor extends AbstractConfigurableStepElement impleme
 {
     /**
      * @Assert\NotBlank(groups={"Execution"})
+     *
      * @var string
      */
     protected $labelLocale;
@@ -38,7 +38,7 @@ class FamilyToFlatArrayProcessor extends AbstractConfigurableStepElement impleme
         NormalizerInterface $transNormalizer,
         LocaleRepositoryInterface $localeRepository
     ) {
-        $this->transNormalizer  = $transNormalizer;
+        $this->transNormalizer = $transNormalizer;
         $this->localeRepository = $localeRepository;
     }
 
@@ -86,20 +86,20 @@ class FamilyToFlatArrayProcessor extends AbstractConfigurableStepElement impleme
     {
         return [
             'labelLocale' => [
-                'type'    => 'choice',
+                'type' => 'choice',
                 'options' => [
-                    'choices'  => $this->getActivatedLocaleChoices(),
+                    'choices' => $this->getActivatedLocaleChoices(),
                     'required' => true,
-                    'select2'  => true,
-                    'label'    => 'pim_enhanced_connector.family_processor.locale.label',
-                    'help'     => 'pim_enhanced_connector.family_processor.locale.help',
+                    'select2' => true,
+                    'label' => 'pim_enhanced_connector.family_processor.locale.label',
+                    'help' => 'pim_enhanced_connector.family_processor.locale.help',
                 ],
             ],
         ];
     }
 
     /**
-     * Return a choice list of activated locales.
+     * Returns a choice list of activated locales.
      *
      * @return array
      */

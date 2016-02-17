@@ -4,11 +4,9 @@ namespace Pim\Bundle\EnhancedConnectorBundle\Doctrine\ORM\Join;
 
 use Pim\Bundle\CatalogBundle\Doctrine\ORM\Join\CompletenessJoin as BaseCompletenessJoin;
 
-use Doctrine\ORM\QueryBuilder;
-
 /**
  * Override of the completeness join utils class in order to make
- * locale and channel optional
+ * locale and channel optional.
  *
  * @author    Benoit Jacquemont <benoit@akeneo.com>
  * @copyright 2015 Akeneo SAS (http://www.akeneo.com)
@@ -17,15 +15,15 @@ use Doctrine\ORM\QueryBuilder;
 class CompletenessJoin extends BaseCompletenessJoin
 {
     /**
-     * {inheritdoc}
+     * {@inheritdoc}.
      */
     public function addJoins($completenessAlias, $locale, $scope)
     {
-        $rootAlias         = $this->qb->getRootAlias();
-        $localeAlias       = $completenessAlias.'Locale';
-        $channelAlias      = $completenessAlias.'Channel';
+        $rootAlias = $this->qb->getRootAlias();
+        $localeAlias = $completenessAlias.'Locale';
+        $channelAlias = $completenessAlias.'Channel';
 
-        $rootEntity        = current($this->qb->getRootEntities());
+        $rootEntity = current($this->qb->getRootEntities());
         $completenessMapping = $this->qb->getEntityManager()
             ->getClassMetadata($rootEntity)
             ->getAssociationMapping('completenesses');
@@ -49,21 +47,21 @@ class CompletenessJoin extends BaseCompletenessJoin
 
         $this->qb
             ->leftJoin(
-                    'PimCatalogBundle:Channel',
-                    $channelAlias,
-                    'WITH',
-                    $channelAlias.'.code = :cScopeCode'
-                    )
+                'PimCatalogBundle:Channel',
+                $channelAlias,
+                'WITH',
+                $channelAlias.'.code = :cScopeCode'
+            )
             ->setParameter('cScopeCode', $scope);
 
         $joinCondition .= ' AND '.$completenessAlias.'.channel = '.$channelAlias.'.id';
 
         $this->qb->leftJoin(
-                $completenessClass,
-                $completenessAlias,
-                'WITH',
-                $joinCondition
-            );
+            $completenessClass,
+            $completenessAlias,
+            'WITH',
+            $joinCondition
+        );
 
         return $this;
     }

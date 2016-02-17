@@ -19,7 +19,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Override of the PIM product reader to add new options (delta based on date condition,
- * complete or not products, enabled or not, etc...)
+ * complete or not products, enabled or not, etc...).
  *
  * @author    Benoit Jacquemont <benoit@akeneo.com>
  * @copyright 2014 Akeneo SAS (http://www.akeneo.com)
@@ -47,35 +47,40 @@ class ProductReader extends AbstractConfigurableStepElement implements ProductRe
     /** @var StepExecution */
     protected $stepExecution;
 
-    /** @var boolean */
+    /** @var bool */
     protected $generateCompleteness;
 
     /**
      * @Assert\NotBlank(groups={"Execution"})
+     *
      * @var string
      */
     protected $updatedCondition;
 
     /**
      * @Assert\DateTime(groups={"Execution"})
+     *
      * @var string
      */
     protected $updatedSince;
 
     /**
      * @Assert\NotBlank(groups={"Execution"})
+     *
      * @var string
      */
     protected $enabledCondition;
 
     /**
      * @Assert\NotBlank(groups={"Execution"})
+     *
      * @var string
      */
     protected $categorizationCondition;
 
     /**
      * @Assert\NotBlank(groups={"Execution"})
+     *
      * @var string
      */
     protected $completeCondition;
@@ -92,7 +97,7 @@ class ProductReader extends AbstractConfigurableStepElement implements ProductRe
      * @param CompletenessManager                 $completenessManager
      * @param MetricConverter                     $metricConverter
      * @param EntityManager                       $entityManager
-     * @param boolean                             $generateCompleteness
+     * @param bool                                $generateCompleteness
      * @param string                              $jobExecutionClass
      */
     public function __construct(
@@ -104,17 +109,17 @@ class ProductReader extends AbstractConfigurableStepElement implements ProductRe
         $generateCompleteness,
         $jobExecutionClass
     ) {
-        $this->pqbFactory           = $pqbFactory;
-        $this->channelManager       = $channelManager;
-        $this->completenessManager  = $completenessManager;
-        $this->metricConverter      = $metricConverter;
-        $this->entityManager        = $entityManager;
+        $this->pqbFactory = $pqbFactory;
+        $this->channelManager = $channelManager;
+        $this->completenessManager = $completenessManager;
+        $this->metricConverter = $metricConverter;
+        $this->entityManager = $entityManager;
         $this->generateCompleteness = $generateCompleteness;
-        $this->jobExecutionClass    = $jobExecutionClass;
+        $this->jobExecutionClass = $jobExecutionClass;
     }
 
     /**
-     * Set the channel
+     * Sets the channel code.
      *
      * @param string $channel
      *
@@ -128,7 +133,7 @@ class ProductReader extends AbstractConfigurableStepElement implements ProductRe
     }
 
     /**
-     * Get the channel
+     * Gets the channel code.
      *
      * @return string
      */
@@ -138,7 +143,7 @@ class ProductReader extends AbstractConfigurableStepElement implements ProductRe
     }
 
     /**
-     * Get updated from condition
+     * Gets updated from condition.
      *
      * @return string
      */
@@ -148,7 +153,7 @@ class ProductReader extends AbstractConfigurableStepElement implements ProductRe
     }
 
     /**
-     * Set updated from condition
+     * Sets updated from condition.
      *
      * @param string $updatedSince
      *
@@ -162,8 +167,6 @@ class ProductReader extends AbstractConfigurableStepElement implements ProductRe
     }
 
     /**
-     * Get updated condition
-     *
      * @return string
      */
     public function getUpdatedCondition()
@@ -172,8 +175,6 @@ class ProductReader extends AbstractConfigurableStepElement implements ProductRe
     }
 
     /**
-     * Set updated condition
-     *
      * @param string $updatedCondition
      *
      * @return ProductReader
@@ -194,8 +195,6 @@ class ProductReader extends AbstractConfigurableStepElement implements ProductRe
     }
 
     /**
-     * Sets categorization condition
-     *
      * @param string $categorizationCondition
      *
      * @return ProductReader
@@ -208,8 +207,6 @@ class ProductReader extends AbstractConfigurableStepElement implements ProductRe
     }
 
     /**
-     * Get enabled condition
-     *
      * @return string
      */
     public function getEnabledCondition()
@@ -218,8 +215,6 @@ class ProductReader extends AbstractConfigurableStepElement implements ProductRe
     }
 
     /**
-     * Set enabled condition
-     *
      * @param string $enabledCondition
      *
      * @return ProductReader
@@ -232,8 +227,6 @@ class ProductReader extends AbstractConfigurableStepElement implements ProductRe
     }
 
     /**
-     * Get complete condition
-     *
      * @return string
      */
     public function getCompleteCondition()
@@ -242,8 +235,6 @@ class ProductReader extends AbstractConfigurableStepElement implements ProductRe
     }
 
     /**
-     * Set complete condition
-     *
      * @param string $completeCondition
      *
      * @return ProductReader
@@ -261,80 +252,87 @@ class ProductReader extends AbstractConfigurableStepElement implements ProductRe
     public function getConfigurationFields()
     {
         return [
-                'channel' => [
-                    'type'    => 'choice',
-                    'options' => [
-                        'choices'  => $this->channelManager->getChannelChoices(),
-                        'required' => true,
-                        'select2'  => true,
-                        'label'    => 'pim_base_connector.export.channel.label',
-                        'help'     => 'pim_base_connector.export.channel.help'
-                    ]
+            'channel' => [
+                'type' => 'choice',
+                'options' => [
+                    'choices' => $this->channelManager->getChannelChoices(),
+                    'required' => true,
+                    'select2' => true,
+                    'label' => 'pim_base_connector.export.channel.label',
+                    'help' => 'pim_base_connector.export.channel.help',
                 ],
-                'updatedCondition' => [
-                    'type'    => 'choice',
-                    'options' => [
-                        'required' => true,
-                        'select2'  => true,
-                        'label'   => 'pim_enhanced_connector.product_reader.updatedCondition.label',
-                        'help'    => 'pim_enhanced_connector.product_reader.updatedCondition.help',
-                        'choices'  => [
-                            'doNotApply'        => 'pim_enhanced_connector.product_reader.updatedCondition.choices.doNotApply',
-                            'fromDefinedDate'   => 'pim_enhanced_connector.product_reader.updatedCondition.choices.fromDefinedDate',
-                            'fromLastExecution' => 'pim_enhanced_connector.product_reader.updatedCondition.choices.fromLastExecution'
-                        ]
-                    ]
+            ],
+            'updatedCondition' => [
+                'type' => 'choice',
+                'options' => [
+                    'required' => true,
+                    'select2' => true,
+                    'label' => 'pim_enhanced_connector.product_reader.updatedCondition.label',
+                    'help' => 'pim_enhanced_connector.product_reader.updatedCondition.help',
+                    'choices' => [
+                        'doNotApply' => 'pim_enhanced_connector.product_reader.updatedCondition.choices.doNotApply',
+                        'fromDefinedDate' =>
+                            'pim_enhanced_connector.product_reader.updatedCondition.choices.fromDefinedDate',
+                        'fromLastExecution' =>
+                            'pim_enhanced_connector.product_reader.updatedCondition.choices.fromLastExecution',
+                    ],
                 ],
-                'updatedSince' => [
-                    'options' => [
-                        'required' => false,
-                        'label' => 'pim_enhanced_connector.product_reader.updatedSince.label',
-                        'help'  => 'pim_enhanced_connector.product_reader.updatedSince.help'
-                    ]
+            ],
+            'updatedSince' => [
+                'options' => [
+                    'required' => false,
+                    'label' => 'pim_enhanced_connector.product_reader.updatedSince.label',
+                    'help' => 'pim_enhanced_connector.product_reader.updatedSince.help',
                 ],
-                'enabledCondition' => [
-                    'type'    => 'choice',
-                    'options' => [
-                        'required' => true,
-                        'select2'  => true,
-                        'help'    => 'pim_enhanced_connector.product_reader.enabledCondition.help',
-                        'label'   => 'pim_enhanced_connector.product_reader.enabledCondition.label',
-                        'choices'  => [
-                            'onlyEnabled'  => 'pim_enhanced_connector.product_reader.enabledCondition.choices.onlyEnabled',
-                            'onlyDisabled' => 'pim_enhanced_connector.product_reader.enabledCondition.choices.onlyDisabled',
-                            'doNotApply'   => 'pim_enhanced_connector.product_reader.enabledCondition.choices.doNotApply',
-                        ]
-                    ]
+            ],
+            'enabledCondition' => [
+                'type' => 'choice',
+                'options' => [
+                    'required' => true,
+                    'select2' => true,
+                    'help' => 'pim_enhanced_connector.product_reader.enabledCondition.help',
+                    'label' => 'pim_enhanced_connector.product_reader.enabledCondition.label',
+                    'choices' => [
+                        'onlyEnabled' => 'pim_enhanced_connector.product_reader.enabledCondition.choices.onlyEnabled',
+                        'onlyDisabled' => 'pim_enhanced_connector.product_reader.enabledCondition.choices.onlyDisabled',
+                        'doNotApply' => 'pim_enhanced_connector.product_reader.enabledCondition.choices.doNotApply',
+                    ],
                 ],
-                'categorizationCondition' => [
-                    'type'    => 'choice',
-                    'options' => [
-                        'required' => true,
-                        'select2'  => true,
-                        'help'    => 'pim_enhanced_connector.product_reader.categorizationCondition.help',
-                        'label'   => 'pim_enhanced_connector.product_reader.categorizationCondition.label',
-                        'choices'  => [
-                            'onlyCategorized'  => 'pim_enhanced_connector.product_reader.categorizationCondition.choices.onlyCategorized',
-                            'onlyNonCategorized' => 'pim_enhanced_connector.product_reader.categorizationCondition.choices.onlyNonCategorized',
-                            'doNotApply'   => 'pim_enhanced_connector.product_reader.categorizationCondition.choices.doNotApply',
-                        ]
-                    ]
+            ],
+            'categorizationCondition' => [
+                'type' => 'choice',
+                'options' => [
+                    'required' => true,
+                    'select2' => true,
+                    'help' => 'pim_enhanced_connector.product_reader.categorizationCondition.help',
+                    'label' => 'pim_enhanced_connector.product_reader.categorizationCondition.label',
+                    'choices' => [
+                        'onlyCategorized' =>
+                            'pim_enhanced_connector.product_reader.categorizationCondition.choices.onlyCategorized',
+                        'onlyNonCategorized' =>
+                            'pim_enhanced_connector.product_reader.categorizationCondition.choices.onlyNonCategorized',
+                        'doNotApply' =>
+                            'pim_enhanced_connector.product_reader.categorizationCondition.choices.doNotApply',
+                    ],
                 ],
-                'completeCondition' => [
-                    'type'    => 'choice',
-                    'options' => [
-                        'required' => true,
-                        'select2'  => true,
-                        'help'    => 'pim_enhanced_connector.product_reader.completeCondition.help',
-                        'label'   => 'pim_enhanced_connector.product_reader.completeCondition.label',
-                        'choices'  => [
-                            'onlyComplete'   => 'pim_enhanced_connector.product_reader.completeCondition.choices.onlyComplete',
-                            'onlyUncomplete' => 'pim_enhanced_connector.product_reader.completeCondition.choices.onlyUncomplete',
-                            'doNotApply'     => 'pim_enhanced_connector.product_reader.completeCondition.choices.doNotApply'
-                        ]
-                    ]
-                ]
-            ];
+            ],
+            'completeCondition' => [
+                'type' => 'choice',
+                'options' => [
+                    'required' => true,
+                    'select2' => true,
+                    'help' => 'pim_enhanced_connector.product_reader.completeCondition.help',
+                    'label' => 'pim_enhanced_connector.product_reader.completeCondition.label',
+                    'choices' => [
+                        'onlyComplete' =>
+                            'pim_enhanced_connector.product_reader.completeCondition.choices.onlyComplete',
+                        'onlyUncomplete' =>
+                            'pim_enhanced_connector.product_reader.completeCondition.choices.onlyUncomplete',
+                        'doNotApply' => 'pim_enhanced_connector.product_reader.completeCondition.choices.doNotApply',
+                    ],
+                ],
+            ],
+        ];
     }
 
     /**
@@ -361,7 +359,7 @@ class ProductReader extends AbstractConfigurableStepElement implements ProductRe
     }
 
     /**
-     * @{inheritdoc}
+     * {@inheritdoc}
      */
     public function read()
     {
@@ -390,7 +388,7 @@ class ProductReader extends AbstractConfigurableStepElement implements ProductRe
     }
 
     /**
-     * Applies updated date filter
+     * Applies updated date filter.
      *
      * @param ProductQueryBuilderInterface $pqb
      */
@@ -399,12 +397,12 @@ class ProductReader extends AbstractConfigurableStepElement implements ProductRe
         $updatedDate = null;
 
         switch ($this->updatedCondition) {
-            case "fromDefinedDate":
+            case 'fromDefinedDate':
                 if (null !== $this->updatedSince) {
                     $updatedDate = $this->updatedSince;
                 }
                 break;
-            case "fromLastExecution":
+            case 'fromLastExecution':
                 $updatedDate = $this->getLastExecutionDate();
                 break;
         }
@@ -415,7 +413,7 @@ class ProductReader extends AbstractConfigurableStepElement implements ProductRe
     }
 
     /**
-     * Applies enabled filter
+     * Applies enabled filter.
      *
      * @param ProductQueryBuilderInterface $pqb
      */
@@ -424,10 +422,10 @@ class ProductReader extends AbstractConfigurableStepElement implements ProductRe
         $enabled = null;
 
         switch ($this->enabledCondition) {
-            case "onlyDisabled":
+            case 'onlyDisabled':
                 $enabled = false;
                 break;
-            case "onlyEnabled":
+            case 'onlyEnabled':
                 $enabled = true;
                 break;
         }
@@ -438,7 +436,7 @@ class ProductReader extends AbstractConfigurableStepElement implements ProductRe
     }
 
     /**
-     * Applies complete filter
+     * Applies complete filter.
      *
      * @param ProductQueryBuilderInterface $pqb
      * @param ChannelInterface             $channel
@@ -446,35 +444,35 @@ class ProductReader extends AbstractConfigurableStepElement implements ProductRe
     protected function applyCompleteFilter(ProductQueryBuilderInterface $pqb, ChannelInterface $channel)
     {
         switch ($this->completeCondition) {
-            case "onlyComplete":
+            case 'onlyComplete':
                 $pqb->addFilter('completeness_for_export', '=', 100, ['scope' => $channel->getCode()]);
                 break;
-            case "onlyUncomplete":
+            case 'onlyUncomplete':
                 $pqb->addFilter('completeness_for_export', '<', 100, ['scope' => $channel->getCode()]);
                 break;
         }
     }
 
     /**
-     * Applies categorization filter
+     * Applies categorization filter.
      *
      * @param ProductQueryBuilderInterface $pqb
      * @param ChannelInterface             $channel
      */
     protected function applyCategorizationFilter(ProductQueryBuilderInterface $pqb, ChannelInterface $channel)
     {
-        switch($this->categorizationCondition) {
-            case "onlyCategorized":
+        switch ($this->categorizationCondition) {
+            case 'onlyCategorized':
                 $pqb->addFilter('categories.id', 'IN CHILDREN', [$channel->getCategory()->getId()]);
                 break;
-            case "onlyNonCategorized":
+            case 'onlyNonCategorized':
                 $pqb->addFilter('categories.id', 'UNCLASSIFIED', []);
                 break;
         }
     }
 
     /**
-     * Get the last successful execution date for the current job instance
+     * Gets the last successful execution date for the current job instance.
      *
      * @return \DateTime||null
      */
@@ -482,7 +480,7 @@ class ProductReader extends AbstractConfigurableStepElement implements ProductRe
     {
         $query = $this->entityManager->createQuery(
             sprintf(
-                "SELECT MAX(e.endTime) FROM %s e WHERE e.jobInstance = :jobInstance AND e.exitCode = :completed",
+                'SELECT MAX(e.endTime) FROM %s e WHERE e.jobInstance = :jobInstance AND e.exitCode = :completed',
                 $this->jobExecutionClass
             )
         );

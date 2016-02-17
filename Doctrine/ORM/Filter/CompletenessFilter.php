@@ -5,11 +5,10 @@ namespace Pim\Bundle\EnhancedConnectorBundle\Doctrine\ORM\Filter;
 use Pim\Bundle\EnhancedConnectorBundle\Doctrine\ORM\Join\CompletenessJoin;
 use Pim\Bundle\CatalogBundle\Doctrine\ORM\Filter\CompletenessFilter as BaseCompletenessFilter;
 use Pim\Component\Catalog\Exception\InvalidArgumentException;
-use Pim\Bundle\CatalogBundle\Query\Filter\FieldFilterInterface;
 
 /**
  * Override of the completeness filter that allows to apply completeness
- * filter only on scope (channel) without locale restriction
+ * filter only on scope (channel) without locale restriction.
  *
  * @author    Benoit Jacquemont <nicolas@akeneo.com>
  * @copyright 2015 Akeneo SAS (http://www.akeneo.com)
@@ -25,7 +24,7 @@ class CompletenessFilter extends BaseCompletenessFilter
         $this->checkValue($field, $value, $locale, $scope);
 
         $joinAlias = $this->getUniqueAlias('filterCompleteness');
-        $field = $joinAlias . '.ratio';
+        $field = $joinAlias.'.ratio';
 
         $util = new CompletenessJoin($this->qb);
         $util->addJoins($joinAlias, $locale, $scope);

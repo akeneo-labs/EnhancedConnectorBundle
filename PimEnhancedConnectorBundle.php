@@ -3,10 +3,9 @@
 namespace Pim\Bundle\EnhancedConnectorBundle;
 
 use Akeneo\Bundle\BatchBundle\Connector\Connector;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
- * Enhanced connector bundle
+ * Enhanced connector bundle.
  *
  * @author    Benoit Jacquemont <benoit@akeneo.com>
  * @copyright 2015 Akeneo SAS (http://www.akeneo.com)
@@ -15,4 +14,3 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 class PimEnhancedConnectorBundle extends Connector
 {
 }
-

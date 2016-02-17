@@ -4,11 +4,10 @@ namespace Pim\Bundle\EnhancedConnectorBundle\Doctrine\MongoDBODM\Filter;
 
 use Pim\Bundle\CatalogBundle\Doctrine\MongoDBODM\Filter\DateFilter;
 use Pim\Component\Catalog\Exception\InvalidArgumentException;
-use Pim\Bundle\CatalogBundle\Query\Filter\Operators;
 use Pim\Bundle\CatalogBundle\Doctrine\MongoDBODM\ProductQueryUtility;
 
 /**
- * Override of the date filter to allow the use of the time part
+ * Override of the date filter to allow the use of the time part.
  *
  * @author    Benoit Jacquemont <benoit@akeneo.com>
  * @copyright 2015 Akeneo SAS (http://www.akeneo.com)
@@ -16,8 +15,8 @@ use Pim\Bundle\CatalogBundle\Doctrine\MongoDBODM\ProductQueryUtility;
  */
 class DateTimeFilter extends DateFilter
 {
-    /** @staticvar string */
-    const GREATER_THAN_OR_EQUALS_WITH_TIME = ">= WITH TIME";
+    /** @const string */
+    const GREATER_THAN_OR_EQUALS_WITH_TIME = '>= WITH TIME';
 
     /**
      * Override to add new operator and to work on time
