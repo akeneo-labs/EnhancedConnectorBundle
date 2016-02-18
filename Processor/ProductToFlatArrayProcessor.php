@@ -57,7 +57,9 @@ class ProductToFlatArrayProcessor extends BaseProductToFlatArrayProcessor
     {
         $normalizedProduct = parent::process($product);
 
-        $this->objectDetacher->detach($product);
+        if (null !== $this->objectDetacher) {
+            $this->objectDetacher->detach($product);
+        }
 
         return $normalizedProduct;
     }
