@@ -8,7 +8,7 @@ use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
- * Enhanced connector bundle extension
+ * Enhanced connector bundle extension.
  *
  * @author    Benoit Jacquemont <benoit@akeneo.com>
  * @copyright 2015 Akeneo SAS (http://www.akeneo.com)
@@ -30,7 +30,7 @@ class PimEnhancedConnectorExtension extends Extension
     }
 
     /**
-     * Load the mapping for product and product storage
+     * Loads the mapping for product and product storage.
      *
      * @param ContainerBuilder $container
      */
@@ -39,9 +39,8 @@ class PimEnhancedConnectorExtension extends Extension
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $storageDriver = $container->getParameter('pim_catalog_product_storage_driver');
         $storageConfig = sprintf('storage_driver/%s.yml', $storageDriver);
-        if (file_exists(__DIR__ . '/../Resources/config/' . $storageConfig)) {
+        if (file_exists(__DIR__.'/../Resources/config/'.$storageConfig)) {
             $loader->load($storageConfig);
         }
     }
 }
-

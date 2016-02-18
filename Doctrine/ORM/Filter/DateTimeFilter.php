@@ -3,11 +3,11 @@
 namespace Pim\Bundle\EnhancedConnectorBundle\Doctrine\ORM\Filter;
 
 use Pim\Bundle\CatalogBundle\Doctrine\ORM\Filter\DateFilter;
-use Pim\Bundle\CatalogBundle\Exception\InvalidArgumentException;
+use Pim\Component\Catalog\Exception\InvalidArgumentException;
 
 /**
  * Override of the date filter to allow the use of the time part for the
- * >= WITH TIME new operator on fields (main used for 'updated' field)
+ * >= WITH TIME new operator on fields (main used for 'updated' field).
  *
  * @author    Benoit Jacquemont <benoit@akeneo.com>
  * @copyright 2015 Akeneo SAS (http://www.akeneo.com)
@@ -15,8 +15,8 @@ use Pim\Bundle\CatalogBundle\Exception\InvalidArgumentException;
  */
 class DateTimeFilter extends DateFilter
 {
-    /** @staticvar string */
-    const GREATER_THAN_OR_EQUALS_WITH_TIME = ">= WITH TIME";
+    /** @const string */
+    const GREATER_THAN_OR_EQUALS_WITH_TIME = '>= WITH TIME';
 
     /**
      * Override to add new operator and to work on time
@@ -41,7 +41,7 @@ class DateTimeFilter extends DateFilter
                 }
             }
 
-            $field = current($this->qb->getRootAliases()) . '.' . $field;
+            $field = current($this->qb->getRootAliases()).'.'.$field;
 
             $utcDateTimeValue = new \DateTime();
             $utcDateTimeValue->setTimezone(new \DateTimeZone('Etc/UTC'));

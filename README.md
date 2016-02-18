@@ -2,14 +2,15 @@
 
 This bundle adds some new exports to Akeneo:
 
- - Family exports, complete or only codes and labels.
+ - Family export in CSV format for PimGento (only codes and labels).
 
- - Enhanced attribute export with corresponding family code.
- 
+ - Attribute export in CSV format for PimGento with corresponding family code.
+
  - Enhanced product export: choose if you want to export all products, products modified since a specific date or modified since the last export.
 
 This bundle can be use as a replacement for the [DnD-MagentoConnectorBundle](https://github.com/Agence-DnD/DnD-MagentoConnectorBundle), to work with [PimGento](https://github.com/Agence-DnD/PIMGento).
 However, it does not provide a SSH export as the DnD Magento connector bundle does. If you need to automatically send your exports to PimGento, you should set up a CRON task and include the SSH export in it.
+
 
 ## Requirements
 
@@ -17,6 +18,8 @@ However, it does not provide a SSH export as the DnD Magento connector bundle do
 |:-----------------------:|:----------------------------:|
 | v1.0.\*                 | v1.3.\*                      |
 | v1.1.\*                 | v1.4.\*                      |
+| v1.2.\*                 | v1.5.\*                      |
+
 
 ## Installation
 
@@ -24,32 +27,33 @@ Install the bundle with composer:
 
     $ php composer.phar require akeneo-labs/pim-enhanced-connector:~1.0
 
-If you want to use the development version (only for test purpose, do not use it in production), replace `~1.0` by `dev-master` in the previous command.
-
 Enable the bundle in the `app/AppKernel.php` file:
 
-        public function registerBundles()
-        {
-            $bundles = [
-                new Pim\Bundle\EnhancedConnectorBundle\PimEnhancedConnectorBundle()
-            ]
+.. code-block:: php
 
-            ...
+    public function registerBundles()
+    {
+        $bundles = [
+            new Pim\Bundle\EnhancedConnectorBundle\PimEnhancedConnectorBundle()
+        ]
 
-            return $bundles;
-        }
+        // ...
+
+        return $bundles;
+    }
 
 Then clean the cache and reinstall the assets:
 
     php app/console cache:clear --env=prod
-    
+
     php app/console pim:install:assets --env=prod
 
-## Use of the Enhanced connector bundle with PimGento
+
+## Documentation
 
 ### Configuration
 
-This section explains how to export your data from Akeneo. If you want to know how to use them once exported, take a look at the [PimGento documentation](https://github.com/Agence-DnD/PIMGento#configuration-and-usage).
+This section explains how to export your data from Akeneo PIM. If you want to know how to use them once exported, take a look at the [PimGento documentation](https://github.com/Agence-DnD/PIMGento#configuration-and-usage).
 
 Go to ```Spread > Export``` and create the export you need (note that you can export your data in whatever order you want, only PimGento requires that you import data in a precise order, the same that is used below):
 

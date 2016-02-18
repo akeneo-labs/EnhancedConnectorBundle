@@ -2,15 +2,15 @@
 
 namespace Pim\Bundle\EnhancedConnectorBundle\Doctrine\MongoDBODM\Filter;
 
-use Pim\Bundle\CatalogBundle\Doctrine\MongoDBODM\ProductQueryUtility;
 use Pim\Bundle\CatalogBundle\Doctrine\MongoDBODM\Filter\CompletenessFilter as BaseCompletenessFilter;
-use Pim\Bundle\CatalogBundle\Exception\InvalidArgumentException;
-use Pim\Bundle\CatalogBundle\Query\Filter\Operators;
+use Pim\Bundle\CatalogBundle\Doctrine\MongoDBODM\ProductQueryUtility;
 use Pim\Bundle\CatalogBundle\Manager\ChannelManager;
+use Pim\Bundle\CatalogBundle\Query\Filter\Operators;
+use Pim\Component\Catalog\Exception\InvalidArgumentException;
 
 /**
- * Override of the completeness filter that allows to apply completeness
- * filter only on scope (channel) without locale restriction
+ * Overrides of the completeness filter that allows to apply completeness
+ * filter only on scope (channel) without locale restriction.
  *
  * @author    Benoit Jacquemont <nicolas@akeneo.com>
  * @copyright 2015 Akeneo SAS (http://www.akeneo.com)
@@ -22,10 +22,8 @@ class CompletenessFilter extends BaseCompletenessFilter
     protected $channelManager;
 
     /**
-     * Instanciate the filter
-     *
-     * @param array $supportedFields
-     * @param array $supportedOperators
+     * @param array          $supportedFields
+     * @param array          $supportedOperators
      * @param ChannelManager $channelManager
      */
     public function __construct(
@@ -48,7 +46,7 @@ class CompletenessFilter extends BaseCompletenessFilter
 
         foreach ($channel->getLocales() as $locale) {
             $field = sprintf(
-                "%s.%s.%s-%s",
+                '%s.%s.%s-%s',
                 ProductQueryUtility::NORMALIZED_FIELD,
                 'completenesses',
                 $scope,
@@ -79,11 +77,11 @@ class CompletenessFilter extends BaseCompletenessFilter
     }
 
     /**
-     * Generate an Expr for query with the given operator on the value
+     * Generates an Expr for query with the given operator on the value.
      *
-     * @param integer $value
-     * @param string  $field
-     * @param string  $operator
+     * @param int    $value
+     * @param string $field
+     * @param string $operator
      *
      * @return Doctrine\ODM\MongoDB\Query\Expr
      */

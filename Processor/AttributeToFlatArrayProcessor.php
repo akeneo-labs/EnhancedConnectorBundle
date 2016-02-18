@@ -2,10 +2,10 @@
 
 namespace Pim\Bundle\EnhancedConnectorBundle\Processor;
 
-use Akeneo\Bundle\BatchBundle\Item\AbstractConfigurableStepElement;
-use Akeneo\Bundle\BatchBundle\Item\ItemProcessorInterface;
-use Pim\Bundle\CatalogBundle\Manager\LocaleManager;
-use Pim\Bundle\CatalogBundle\Model\AttributeInterface;
+use Akeneo\Component\Batch\Item\AbstractConfigurableStepElement;
+use Akeneo\Component\Batch\Item\ItemProcessorInterface;
+use Pim\Component\Catalog\Model\AttributeInterface;
+use Pim\Component\Catalog\Repository\LocaleRepositoryInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 /**
@@ -17,23 +17,23 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
  */
 class AttributeToFlatArrayProcessor extends AbstractConfigurableStepElement implements ItemProcessorInterface
 {
-    /** @staticvar string */
+    /** @const string */
     const ITEM_SEPARATOR = ',';
 
-    /** @var LocaleManager */
-    protected $localeManager;
+    /** @var LocaleRepositoryInterface */
+    protected $localeRepository;
 
     /** @var NormalizerInterface */
     protected $transNormalizer;
 
     /**
-     * @param NormalizerInterface $transNormalizer
-     * @param LocaleManager       $localeManager
+     * @param NormalizerInterface       $transNormalizer
+     * @param LocaleRepositoryInterface $localeRepository
      */
-    public function __construct(NormalizerInterface $transNormalizer, LocaleManager $localeManager)
+    public function __construct(NormalizerInterface $transNormalizer, LocaleRepositoryInterface $localeRepository)
     {
-        $this->transNormalizer = $transNormalizer;
-        $this->localeManager   = $localeManager;
+        $this->transNormalizer  = $transNormalizer;
+        $this->localeRepository = $localeRepository;
     }
 
     /**
@@ -42,26 +42,26 @@ class AttributeToFlatArrayProcessor extends AbstractConfigurableStepElement impl
     public function process($attribute)
     {
         $context = [
-            'locales' => $this->localeManager->getActiveCodes(),
+            'locales' => $this->localeRepository->getActivatedLocaleCodes(),
         ];
 
         $flatAttribute = [
-                'type' => $attribute->getAttributeType(),
-                'code' => $attribute->getCode()
-            ] + $this->transNormalizer->normalize($attribute, null, $context);
+            'type' => $attribute->getAttributeType(),
+            'code' => $attribute->getCode(),
+        ] + $this->transNormalizer->normalize($attribute, null, $context);
 
         $flatAttribute = array_merge(
             $flatAttribute,
             [
-                'group'                   => ($attribute->getGroup()) ? $attribute->getGroup()->getCode() : null,
-                'unique'                  => (int) $attribute->isUnique(),
-                'useable_as_grid_filter'  => (int) $attribute->isUseableAsGridFilter(),
-                'allowed_extensions'      => implode(self::ITEM_SEPARATOR, $attribute->getAllowedExtensions()),
-                'metric_family'           => $attribute->getMetricFamily(),
-                'default_metric_unit'     => $attribute->getDefaultMetricUnit(),
-                'localizable'             => (int) $attribute->isLocalizable(),
-                'scopable'                => (int) $attribute->isScopable(),
-                'families'                => $this->getAttributeFamilyCodes($attribute),
+                'group' => ($attribute->getGroup()) ? $attribute->getGroup()->getCode() : null,
+                'unique' => (int) $attribute->isUnique(),
+                'useable_as_grid_filter' => (int) $attribute->isUseableAsGridFilter(),
+                'allowed_extensions' => implode(self::ITEM_SEPARATOR, $attribute->getAllowedExtensions()),
+                'metric_family' => $attribute->getMetricFamily(),
+                'default_metric_unit' => $attribute->getDefaultMetricUnit(),
+                'localizable' => (int) $attribute->isLocalizable(),
+                'scopable' => (int) $attribute->isScopable(),
+                'families' => $this->getAttributeFamilyCodes($attribute),
             ]
         );
 
@@ -69,7 +69,7 @@ class AttributeToFlatArrayProcessor extends AbstractConfigurableStepElement impl
     }
 
     /**
-     * Return the list of all the family codes of the attribute.
+     * Returns the list of all the family codes of the attribute.
      *
      * @param AttributeInterface $attribute
      *

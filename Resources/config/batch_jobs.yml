@@ -9,21 +9,10 @@ connector:
                     title: pim_enhanced_connector.export.product.title
                     services:
                         reader:    pim_enhanced_connector.reader.product
-                        processor: pim_enhanced_connector.processor.product_to_flat_array
+                        processor: pim_base_connector.processor.product_to_flat_array
                         writer:    pim_base_connector.writer.file.csv_product
                     parameters:
                         batch_size: 10
-
-        csv_family_export:
-            title: pim_enhanced_connector.export.family.title
-            type:  export
-            steps:
-                export:
-                    title:     pim_enhanced_connector.export.family.title
-                    services:
-                        reader:    pim_enhanced_connector.reader.orm.family
-                        processor: pim_base_connector.processor.csv_serializer.homogeneous
-                        writer:    pim_base_connector.writer.file
 
         pimgento_csv_family_export:
             title: pim_enhanced_connector.export.pimgento.family.title
@@ -32,7 +21,7 @@ connector:
                 export:
                     title:     pim_enhanced_connector.export.pimgento.family.title
                     services:
-                        reader:    pim_enhanced_connector.reader.orm.family
+                        reader:    pim_base_connector.reader.orm.family
                         processor: pim_enhanced_connector.processor.family_to_flat_array
                         writer:    pim_base_connector.writer.file.csv
 
