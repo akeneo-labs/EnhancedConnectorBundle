@@ -32,8 +32,8 @@ class AttributeToFlatArrayProcessor extends AbstractConfigurableStepElement impl
      */
     public function __construct(NormalizerInterface $transNormalizer, LocaleRepositoryInterface $localeRepository)
     {
-        $this->transNormalizer = $transNormalizer;
-        $this->localeRepository   = $localeRepository;
+        $this->transNormalizer  = $transNormalizer;
+        $this->localeRepository = $localeRepository;
     }
 
     /**

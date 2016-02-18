@@ -30,7 +30,7 @@ class PimEnhancedConnectorExtension extends Extension
     }
 
     /**
-     * Load the mapping for product and product storage.
+     * Loads the mapping for product and product storage.
      *
      * @param ContainerBuilder $container
      */
