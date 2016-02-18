@@ -2,20 +2,19 @@
 
 namespace Pim\Bundle\EnhancedConnectorBundle\Reader;
 
-use Akeneo\Component\Batch\Model\StepExecution;
 use Akeneo\Component\Batch\Item\AbstractConfigurableStepElement;
 use Akeneo\Component\Batch\Job\ExitStatus;
+use Akeneo\Component\Batch\Model\StepExecution;
 use Akeneo\Component\StorageUtils\Cursor\CursorInterface;
 use Akeneo\Component\StorageUtils\Detacher\ObjectDetacherInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Pim\Bundle\BaseConnectorBundle\Reader\ProductReaderInterface;
-use Pim\Bundle\BaseConnectorBundle\Validator\Constraints\Channel as ChannelConstraint;
 use Pim\Bundle\CatalogBundle\Manager\ChannelManager;
 use Pim\Bundle\CatalogBundle\Manager\CompletenessManager;
-use Pim\Component\Catalog\Model\ChannelInterface;
 use Pim\Bundle\CatalogBundle\Query\ProductQueryBuilderFactoryInterface;
 use Pim\Bundle\CatalogBundle\Query\ProductQueryBuilderInterface;
 use Pim\Bundle\TransformBundle\Converter\MetricConverter;
+use Pim\Component\Catalog\Model\ChannelInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**

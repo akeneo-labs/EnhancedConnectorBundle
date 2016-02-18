@@ -2,8 +2,8 @@
 
 namespace Pim\Bundle\EnhancedConnectorBundle\Doctrine\ORM\Filter;
 
-use Pim\Bundle\EnhancedConnectorBundle\Doctrine\ORM\Join\CompletenessJoin;
 use Pim\Bundle\CatalogBundle\Doctrine\ORM\Filter\CompletenessFilter as BaseCompletenessFilter;
+use Pim\Bundle\EnhancedConnectorBundle\Doctrine\ORM\Join\CompletenessJoin;
 use Pim\Component\Catalog\Exception\InvalidArgumentException;
 
 /**

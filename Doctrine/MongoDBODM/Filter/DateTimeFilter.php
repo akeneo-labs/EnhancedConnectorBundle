@@ -3,8 +3,8 @@
 namespace Pim\Bundle\EnhancedConnectorBundle\Doctrine\MongoDBODM\Filter;
 
 use Pim\Bundle\CatalogBundle\Doctrine\MongoDBODM\Filter\DateFilter;
-use Pim\Component\Catalog\Exception\InvalidArgumentException;
 use Pim\Bundle\CatalogBundle\Doctrine\MongoDBODM\ProductQueryUtility;
+use Pim\Component\Catalog\Exception\InvalidArgumentException;
 
 /**
  * Override of the date filter to allow the use of the time part.
