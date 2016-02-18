@@ -2,9 +2,15 @@
 ## New feature
 - Compatibility with Akeneo PIM 1.5
 
+## Improvements
+- Detach products after having read them instead of doing it in the processor
+
 ## BC Break
 - Remove enhanced family export as it has been integrated in Akeneo PIM 1.5
-- Service `pim_enhanced_connector.reader.orm.family` should be replace by `pim_base_connector.reader.orm.family`
+- Replace service `pim_enhanced_connector.reader.orm.family` by `pim_base_connector.reader.orm.family`
+- Replace service `pim_enhanced_connector.processor.product_to_flat_array` by `pim_base_connector.processor.product_to_flat_array`
+- Added `akeneo_storage_utils.doctrine.object_detacher` in `pim_enhanced_connector.reader.product`
+
 
 # 1.1 - (2016-01-28)
 ## Bug fix

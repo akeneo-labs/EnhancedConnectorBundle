@@ -6,7 +6,8 @@ use Akeneo\Component\Batch\Model\StepExecution;
 use Akeneo\Component\Batch\Item\AbstractConfigurableStepElement;
 use Akeneo\Component\Batch\Job\ExitStatus;
 use Akeneo\Component\StorageUtils\Cursor\CursorInterface;
-use Doctrine\ORM\EntityManager;
+use Akeneo\Component\StorageUtils\Detacher\ObjectDetacherInterface;
+use Doctrine\ORM\EntityManagerInterface;
 use Pim\Bundle\BaseConnectorBundle\Reader\ProductReaderInterface;
 use Pim\Bundle\BaseConnectorBundle\Validator\Constraints\Channel as ChannelConstraint;
 use Pim\Bundle\CatalogBundle\Manager\ChannelManager;
@@ -27,13 +28,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class ProductReader extends AbstractConfigurableStepElement implements ProductReaderInterface
 {
-    /**
-     * @var string
-     *
-     * @Assert\NotBlank(groups={"Execution"})
-     * @ChannelConstraint
-     */
-    protected $channel;
+    /** @var ProductQueryBuilderFactoryInterface */
+    protected $pqbFactory;
 
     /** @var ChannelManager */
     protected $channelManager;
@@ -44,11 +40,31 @@ class ProductReader extends AbstractConfigurableStepElement implements ProductRe
     /** @var MetricConverter */
     protected $metricConverter;
 
-    /** @var StepExecution */
-    protected $stepExecution;
+    /** @var EntityManagerInterface */
+    protected $entityManager;
+
+    /** @var ObjectDetacherInterface */
+    protected $objectDetacher;
 
     /** @var bool */
     protected $generateCompleteness;
+
+    /** @var string */
+    protected $jobExecutionClass;
+
+    /** @var StepExecution */
+    protected $stepExecution;
+
+    /** @var CursorInterface */
+    protected $products;
+
+    /**
+     * @Assert\NotBlank(groups={"Execution"})
+     * @ChannelConstraint
+     *
+     * @var string
+     */
+    protected $channel;
 
     /**
      * @Assert\NotBlank(groups={"Execution"})
@@ -85,18 +101,13 @@ class ProductReader extends AbstractConfigurableStepElement implements ProductRe
      */
     protected $completeCondition;
 
-    /** @var string */
-    protected $jobExecutionClass;
-
-    /** @var CursorInterface */
-    protected $products;
-
     /**
      * @param ProductQueryBuilderFactoryInterface $pqbFactory
      * @param ChannelManager                      $channelManager
      * @param CompletenessManager                 $completenessManager
      * @param MetricConverter                     $metricConverter
-     * @param EntityManager                       $entityManager
+     * @param EntityManagerInterface              $entityManager
+     * @param ObjectDetacherInterface             $objectDetacher
      * @param bool                                $generateCompleteness
      * @param string                              $jobExecutionClass
      */
@@ -105,7 +116,8 @@ class ProductReader extends AbstractConfigurableStepElement implements ProductRe
         ChannelManager $channelManager,
         CompletenessManager $completenessManager,
         MetricConverter $metricConverter,
-        EntityManager $entityManager,
+        EntityManagerInterface $entityManager,
+        ObjectDetacherInterface $objectDetacher,
         $generateCompleteness,
         $jobExecutionClass
     ) {
@@ -114,6 +126,7 @@ class ProductReader extends AbstractConfigurableStepElement implements ProductRe
         $this->completenessManager = $completenessManager;
         $this->metricConverter = $metricConverter;
         $this->entityManager = $entityManager;
+        $this->objectDetacher = $objectDetacher;
         $this->generateCompleteness = $generateCompleteness;
         $this->jobExecutionClass = $jobExecutionClass;
     }
@@ -372,6 +385,7 @@ class ProductReader extends AbstractConfigurableStepElement implements ProductRe
         }
 
         if (null !== $product) {
+            $this->objectDetacher->detach($product);
             $channel = $this->channelManager->getChannelByCode($this->channel);
             $this->metricConverter->convert($product, $channel);
         }

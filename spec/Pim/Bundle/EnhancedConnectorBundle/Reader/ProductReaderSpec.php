@@ -2,7 +2,8 @@
 
 namespace spec\Pim\Bundle\EnhancedConnectorBundle\Reader;
 
-use Doctrine\ORM\EntityManager;
+use Akeneo\Component\StorageUtils\Detacher\ObjectDetacherInterface;
+use Doctrine\ORM\EntityManagerInterface;
 use PhpSpec\ObjectBehavior;
 use Pim\Bundle\CatalogBundle\Manager\ChannelManager;
 use Pim\Bundle\CatalogBundle\Manager\CompletenessManager;
@@ -19,7 +20,8 @@ class ProductReaderSpec extends ObjectBehavior
         ChannelManager $channelManager,
         CompletenessManager $completenessManager,
         MetricConverter $metricConverter,
-        EntityManager $entityManager
+        EntityManagerInterface $entityManager,
+        ObjectDetacherInterface $objectDetacher
     ) {
         $this->beConstructedWith(
             $pqbFactory,
@@ -27,6 +29,7 @@ class ProductReaderSpec extends ObjectBehavior
             $completenessManager,
             $metricConverter,
             $entityManager,
+            $objectDetacher,
             true,
             'Akeneo\Component\Batch\Model\JobExecution'
         );
