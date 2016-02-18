@@ -12,9 +12,3 @@ services:
             - '@doctrine.orm.default_entity_manager'
             - true
             - %akeneo_batch.entity.job_execution.class%
-
-    pim_enhanced_connector.reader.orm.family:
-        class: %pim_base_connector.reader.orm.entity.class%
-        arguments:
-            - '@doctrine.orm.default_entity_manager'
-            - %pim_catalog.entity.family.class%
