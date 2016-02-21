@@ -29,7 +29,7 @@ Install the bundle with composer:
 
 Enable the bundle in the `app/AppKernel.php` file:
 
-.. code-block:: php
+```php
 
     public function registerBundles()
     {
@@ -41,6 +41,7 @@ Enable the bundle in the `app/AppKernel.php` file:
 
         return $bundles;
     }
+```
 
 Then clean the cache and reinstall the assets:
 
