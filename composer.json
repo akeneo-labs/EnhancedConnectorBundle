@@ -7,8 +7,7 @@
     "license": "OSL-3.0",
     "authors": [
         {
-            "name":     "Benoit Jacquemont",
-            "email":    "benoit@akeneo.com",
+            "name":     "Akeneo",
             "homepage": "http://www.akeneo.com/"
         }
     ],
@@ -16,14 +15,10 @@
         {
             "type": "vcs",
             "url": "https://github.com/akeneo/pim-community-dev.git"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/akeneo/platform.git"
         }
     ],
     "require": {
-        "akeneo/pim-community-dev": "dev-master",
+        "akeneo/pim-community-dev": "v1.5.0-BETA1",
 	"doctrine/migrations": "1.0.0-alpha3@alpha"
     },
     "require-dev": {
