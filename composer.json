@@ -2,7 +2,7 @@
     "name": "akeneo-labs/pim-enhanced-connector",
     "type": "symfony-bundle",
     "description": "Provides PIM product reader with more option (choice on completeness, choice on enabled, delta based on last export time)",
-    "keywords": ["pim", "product", "export", "delta"],
+    "keywords": ["pim", "product", "export", "delta", "pimgento"],
     "homepage": "http://www.akeneo.com",
     "license": "OSL-3.0",
     "authors": [
