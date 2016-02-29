@@ -2,7 +2,7 @@
     "name": "akeneo-labs/pim-enhanced-connector",
     "type": "symfony-bundle",
     "description": "Provides PIM product reader with more option (choice on completeness, choice on enabled, delta based on last export time)",
-    "keywords": ["pim", "product", "export", "delta"],
+    "keywords": ["pim", "product", "export", "delta", "pimgento"],
     "homepage": "http://www.akeneo.com",
     "license": "OSL-3.0",
     "authors": [
@@ -18,16 +18,15 @@
         }
     ],
     "require": {
-        "akeneo/pim-community-dev": "v1.5.0-BETA1",
+        "akeneo/pim-community-dev": "1.5.x-dev",
         "doctrine/migrations": "1.0.0-alpha3@alpha"
     },
     "require-dev": {
-        "phpspec/phpspec": "2.0.*@dev",
-        "henrikbjorn/phpspec-code-coverage": "1.0.*@dev",
+        "phpspec/phpspec": "2.1.*",
+        "squizlabs/php_codesniffer": "2.3.*",
+        "phpmd/phpmd": "2.3.*",
         "fabpot/php-cs-fixer": "@stable",
-        "squizlabs/php_codesniffer": "1.*",
-        "pdepend/pdepend": "1.1.*",
-        "phpmd/phpmd": "1.*"
+        "henrikbjorn/phpspec-code-coverage": "1.0.*"
     },
     "autoload": {
         "psr-0": { "Pim\\Bundle\\EnhancedConnectorBundle\\": "" }
@@ -36,5 +35,10 @@
         "bin-dir": "bin"
     },
     "minimum-stability": "stable",
-    "target-dir": "Pim/Bundle/EnhancedConnectorBundle"
+    "target-dir": "Pim/Bundle/EnhancedConnectorBundle",
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.2.x-dev"
+        }
+    }
 }
