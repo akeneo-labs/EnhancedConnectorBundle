@@ -35,5 +35,10 @@
         "bin-dir": "bin"
     },
     "minimum-stability": "stable",
-    "target-dir": "Pim/Bundle/EnhancedConnectorBundle"
+    "target-dir": "Pim/Bundle/EnhancedConnectorBundle",
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.2.x-dev"
+        }
+    }
 }
