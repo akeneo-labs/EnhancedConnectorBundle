@@ -1,4 +1,7 @@
-# Akeneo Labs Enhanced connector bundle
+# EnhancedConnectorBundle
+
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/akeneo-labs/EnhancedConnectorBundle/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/akeneo-labs/EnhancedConnectorBundle/?branch=master)
+[![Build Status](https://travis-ci.org/akeneo-labs/EnhancedConnectorBundle.svg?branch=master)](https://travis-ci.org/akeneo-labs/EnhancedConnectorBundle)
 
 This bundle adds some new exports to Akeneo:
 
@@ -16,16 +19,18 @@ However, it does not provide a SSH export as the DnD Magento connector bundle do
 
 | EnhancedConnectorBundle | Akeneo PIM Community Edition |
 |:-----------------------:|:----------------------------:|
-| v1.0.\*                 | v1.3.\*                      |
-| v1.1.\*                 | v1.4.\*                      |
-| v1.2.\*                 | v1.5.\*                      |
+| v1.2.*                  | v1.5.*                       |
+| v1.1.*                  | v1.4.*                       |
+| v1.0.*                  | v1.3.*                       |
 
 
 ## Installation
 
 Install the bundle with composer:
 
+```bash
     $ php composer.phar require akeneo-labs/pim-enhanced-connector:~1.0
+```
 
 Enable the bundle in the `app/AppKernel.php` file:
 
@@ -45,9 +50,11 @@ Enable the bundle in the `app/AppKernel.php` file:
 
 Then clean the cache and reinstall the assets:
 
+```bash
     php app/console cache:clear --env=prod
 
     php app/console pim:install:assets --env=prod
+```
 
 
 ## Documentation
