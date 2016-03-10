@@ -47,7 +47,7 @@ Enable the bundle in the `app/AppKernel.php` file:
     }
 ```
 
-Now let's clear your cache and dump your assets:
+Now let's clean your cache and dump your assets:
 
 ```bash
     php app/console cache:clear --env=prod
