@@ -29,13 +29,12 @@ However, it does not provide a SSH export as the DnD Magento connector bundle do
 Install the bundle with composer:
 
 ```bash
-    $ php composer.phar require akeneo-labs/pim-enhanced-connector:~1.0
+    php composer.phar require akeneo-labs/pim-enhanced-connector:~1.0
 ```
 
 Enable the bundle in the `app/AppKernel.php` file:
 
 ```php
-
     public function registerBundles()
     {
         $bundles = [
@@ -48,12 +47,11 @@ Enable the bundle in the `app/AppKernel.php` file:
     }
 ```
 
-Then clean the cache and reinstall the assets:
+Now let's clean your cache and dump your assets:
 
 ```bash
     php app/console cache:clear --env=prod
-
-    php app/console pim:install:assets --env=prod
+    php app/console pim:installer:assets --env=prod
 ```
 
 
