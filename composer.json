@@ -21,11 +21,11 @@
         "akeneo/pim-community-dev": "1.5.*"
     },
     "require-dev": {
-        "phpspec/phpspec": "2.1.*",
-        "squizlabs/php_codesniffer": "2.3.*",
-        "phpmd/phpmd": "2.3.*",
+        "phpspec/phpspec": "2.4.*",
+        "squizlabs/php_codesniffer": "2.5.*",
+        "phpmd/phpmd": "2.4.*",
         "fabpot/php-cs-fixer": "@stable",
-        "henrikbjorn/phpspec-code-coverage": "1.0.*",
+        "henrikbjorn/phpspec-code-coverage": "~1.0",
         "doctrine/migrations": "1.0.0-alpha3@alpha"
     },
     "autoload": {
@@ -34,7 +34,6 @@
     "config": {
         "bin-dir": "bin"
     },
-    "minimum-stability": "stable",
     "target-dir": "Pim/Bundle/EnhancedConnectorBundle",
     "extra": {
         "branch-alias": {
