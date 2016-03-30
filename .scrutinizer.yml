@@ -1,23 +1,27 @@
 filter:
     paths:
         - ./*
+
 build:
-  tests:
-    override:
-      -
-        command: 'bin/phpspec run -f progress -c phpcpec-scrutinizer.yml'
-        coverage:
-          file: 'coverage.clover'
-          format: 'php-clover'
+    environment:
+        php:
+            version: '5.6'
+            ini:
+                'memory_limit': '3G'
+    dependencies:
+        before:
+            - composer self-update
+    tests:
+        override:
+          -
+            command: 'bin/phpspec run -f progress -c phpspec-scrutinizer.yml'
+            coverage:
+                file: 'coverage.clover'
+                format: 'php-clover'
 
 tools:
+    php_analyzer: false
     php_mess_detector:
-        filter:
-            excluded_paths:
-                - bin/*
-                - spec/*
-                - vendor/*
-    php_analyzer:
         filter:
             excluded_paths:
                 - bin/*
