@@ -63,15 +63,15 @@ This section explains how to export your data from Akeneo PIM. If you want to kn
 
 Go to ```Spread > Export``` and create the export you need (note that you can export your data in whatever order you want, only PimGento requires that you import data in a precise order, the same that is used below):
 
-* Category export: use the standard Akeneo CSV export for category exports.
+1. Category export: use the standard Akeneo CSV export for category exports.
 
-* Family export: use the "Export families to CSV for PimGento" job from the Enhanced connector bundle.
+2. Family export: use the "Export families to CSV for PimGento" job from the Enhanced connector bundle.
 
-* Attribute export: use the "Export attributes to CSV for PimGento" job from the Enhanced connector bundle.
+3. Attribute export: use the "Export attributes to CSV for PimGento" job from the Enhanced connector bundle.
 
-* Attribute option export: use the standard Akeneo CSV export for attribute options.
+4. Attribute option export: use the standard Akeneo CSV export for attribute options.
 
-* Product export: use the "Export products using enhanced product reader" job from the Enhanced connector bundle.
+5. Product export: use the "Export products using enhanced product reader" job from the Enhanced connector bundle.
 
 All these exports are configured like standards CSV Akeneo exports: you need to define a delimitor (the character separating the elements on a same line), an enclosure (for instance, if a label contain spaces, it needs to be enclose to avoid import errors), if you want headers in your file, and the file path to save your export.
 
