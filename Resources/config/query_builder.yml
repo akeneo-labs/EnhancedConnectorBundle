@@ -1,8 +1,8 @@
 services:
     pim_enhanced_connector.doctrine.query.filter.date_time:
-        class: %pim_enhanced_connector.doctrine.query.filter.date_time.class%
+        class: '%pim_enhanced_connector.doctrine.query.filter.date_time.class%'
         arguments:
-            - @pim_catalog.validator.helper.attribute
+            - '@pim_catalog.validator.helper.attribute'
             - []
             - ['updated']
             - ['>= WITH TIME','=', '<', '>', 'BETWEEN', 'NOT BETWEEN', 'EMPTY']

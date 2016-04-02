@@ -21,7 +21,7 @@ class PimEnhancedConnectorExtension extends Extension
      */
     public function load(array $configs, ContainerBuilder $container)
     {
-        $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('processors.yml');
         $loader->load('query_builder.yml');
         $loader->load('readers.yml');
@@ -36,10 +36,10 @@ class PimEnhancedConnectorExtension extends Extension
      */
     protected function loadStorageDriver(ContainerBuilder $container)
     {
-        $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $storageDriver = $container->getParameter('pim_catalog_product_storage_driver');
         $storageConfig = sprintf('storage_driver/%s.yml', $storageDriver);
-        if (file_exists(__DIR__.'/../Resources/config/'.$storageConfig)) {
+        if (file_exists(__DIR__ . '/../Resources/config/' . $storageConfig)) {
             $loader->load($storageConfig);
         }
     }

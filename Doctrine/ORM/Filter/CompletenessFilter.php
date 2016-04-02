@@ -24,7 +24,7 @@ class CompletenessFilter extends BaseCompletenessFilter
         $this->checkValue($field, $value, $locale, $scope);
 
         $joinAlias = $this->getUniqueAlias('filterCompleteness');
-        $field = $joinAlias.'.ratio';
+        $field = $joinAlias . '.ratio';
 
         $util = new CompletenessJoin($this->qb);
         $util->addJoins($joinAlias, $locale, $scope);

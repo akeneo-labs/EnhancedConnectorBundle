@@ -86,13 +86,13 @@ class FamilyToFlatArrayProcessor extends AbstractConfigurableStepElement impleme
     {
         return [
             'labelLocale' => [
-                'type' => 'choice',
+                'type'    => 'choice',
                 'options' => [
-                    'choices' => $this->getActivatedLocaleChoices(),
+                    'choices'  => $this->getActivatedLocaleChoices(),
                     'required' => true,
-                    'select2' => true,
-                    'label' => 'pim_enhanced_connector.family_processor.locale.label',
-                    'help' => 'pim_enhanced_connector.family_processor.locale.help',
+                    'select2'  => true,
+                    'label'    => 'pim_enhanced_connector.family_processor.locale.label',
+                    'help'     => 'pim_enhanced_connector.family_processor.locale.help',
                 ],
             ],
         ];

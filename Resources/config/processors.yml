@@ -4,13 +4,13 @@ parameters:
 
 services:
     pim_enhanced_connector.processor.family_to_flat_array:
-        class: %pim_enhanced_connector.processor.family_to_flat_array.class%
+        class: '%pim_enhanced_connector.processor.family_to_flat_array.class%'
         arguments:
             - '@pim_serializer.normalizer.label_translation'
             - '@pim_catalog.repository.locale'
 
     pim_enhanced_connector.processor.attribute_to_flat_array:
-        class: %pim_enhanced_connector.processor.attribute_to_flat_array.class%
+        class: '%pim_enhanced_connector.processor.attribute_to_flat_array.class%'
         arguments:
             - '@pim_serializer.normalizer.flat.label_translation'
             - '@pim_catalog.repository.locale'
