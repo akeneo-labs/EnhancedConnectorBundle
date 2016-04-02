@@ -33,7 +33,7 @@ class DateTimeFilter extends DateFilter
                 } catch (\Exception $e) {
                     throw InvalidArgumentException::expected(
                         $field,
-                        'DateTime object or new DateTime() compatible string. Error:'.$e->getMessage(),
+                        'DateTime object or new DateTime() compatible string. Error:' . $e->getMessage(),
                         'filter',
                         'date_time',
                         is_string($value) ? $value : gettype($value)
@@ -41,7 +41,7 @@ class DateTimeFilter extends DateFilter
                 }
             }
 
-            $field = current($this->qb->getRootAliases()).'.'.$field;
+            $field = current($this->qb->getRootAliases()) . '.' . $field;
 
             $utcDateTimeValue = new \DateTime();
             $utcDateTimeValue->setTimezone(new \DateTimeZone('Etc/UTC'));

@@ -16,11 +16,13 @@ cache:
     directories:
         - $HOME/.composer/cache
 
-before_script:
+before_install:
     - echo "memory_limit=3G" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
     - phpenv config-rm xdebug.ini
     - echo -e "Host github.com\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
     - composer self-update --no-interaction
+
+install:
     - composer update --no-interaction --no-scripts --prefer-dist
 
 script:

@@ -2,6 +2,7 @@
 
 namespace Pim\Bundle\EnhancedConnectorBundle\Doctrine\MongoDBODM\Filter;
 
+use Doctrine\ODM\MongoDB\Query\Expr;
 use Pim\Bundle\CatalogBundle\Doctrine\MongoDBODM\Filter\CompletenessFilter as BaseCompletenessFilter;
 use Pim\Bundle\CatalogBundle\Doctrine\MongoDBODM\ProductQueryUtility;
 use Pim\Bundle\CatalogBundle\Manager\ChannelManager;
@@ -83,7 +84,7 @@ class CompletenessFilter extends BaseCompletenessFilter
      * @param string $field
      * @param string $operator
      *
-     * @return Doctrine\ODM\MongoDB\Query\Expr
+     * @return Expr
      */
     protected function getExpr($value, $field, $operator)
     {

@@ -265,83 +265,83 @@ class ProductReader extends AbstractConfigurableStepElement implements ProductRe
     public function getConfigurationFields()
     {
         return [
-            'channel' => [
-                'type' => 'choice',
+            'channel'                 => [
+                'type'    => 'choice',
                 'options' => [
-                    'choices' => $this->channelManager->getChannelChoices(),
+                    'choices'  => $this->channelManager->getChannelChoices(),
                     'required' => true,
-                    'select2' => true,
-                    'label' => 'pim_base_connector.export.channel.label',
-                    'help' => 'pim_base_connector.export.channel.help',
+                    'select2'  => true,
+                    'label'    => 'pim_base_connector.export.channel.label',
+                    'help'     => 'pim_base_connector.export.channel.help',
                 ],
             ],
-            'updatedCondition' => [
-                'type' => 'choice',
+            'updatedCondition'        => [
+                'type'    => 'choice',
                 'options' => [
                     'required' => true,
-                    'select2' => true,
-                    'label' => 'pim_enhanced_connector.product_reader.updatedCondition.label',
-                    'help' => 'pim_enhanced_connector.product_reader.updatedCondition.help',
-                    'choices' => [
-                        'doNotApply' => 'pim_enhanced_connector.product_reader.updatedCondition.choices.doNotApply',
-                        'fromDefinedDate' =>
+                    'select2'  => true,
+                    'label'    => 'pim_enhanced_connector.product_reader.updatedCondition.label',
+                    'help'     => 'pim_enhanced_connector.product_reader.updatedCondition.help',
+                    'choices'  => [
+                        'doNotApply'        => 'pim_enhanced_connector.product_reader.updatedCondition.choices.doNotApply',
+                        'fromDefinedDate'   =>
                             'pim_enhanced_connector.product_reader.updatedCondition.choices.fromDefinedDate',
                         'fromLastExecution' =>
                             'pim_enhanced_connector.product_reader.updatedCondition.choices.fromLastExecution',
                     ],
                 ],
             ],
-            'updatedSince' => [
+            'updatedSince'            => [
                 'options' => [
                     'required' => false,
-                    'label' => 'pim_enhanced_connector.product_reader.updatedSince.label',
-                    'help' => 'pim_enhanced_connector.product_reader.updatedSince.help',
+                    'label'    => 'pim_enhanced_connector.product_reader.updatedSince.label',
+                    'help'     => 'pim_enhanced_connector.product_reader.updatedSince.help',
                 ],
             ],
-            'enabledCondition' => [
-                'type' => 'choice',
+            'enabledCondition'        => [
+                'type'    => 'choice',
                 'options' => [
                     'required' => true,
-                    'select2' => true,
-                    'help' => 'pim_enhanced_connector.product_reader.enabledCondition.help',
-                    'label' => 'pim_enhanced_connector.product_reader.enabledCondition.label',
-                    'choices' => [
-                        'onlyEnabled' => 'pim_enhanced_connector.product_reader.enabledCondition.choices.onlyEnabled',
+                    'select2'  => true,
+                    'help'     => 'pim_enhanced_connector.product_reader.enabledCondition.help',
+                    'label'    => 'pim_enhanced_connector.product_reader.enabledCondition.label',
+                    'choices'  => [
+                        'onlyEnabled'  => 'pim_enhanced_connector.product_reader.enabledCondition.choices.onlyEnabled',
                         'onlyDisabled' => 'pim_enhanced_connector.product_reader.enabledCondition.choices.onlyDisabled',
-                        'doNotApply' => 'pim_enhanced_connector.product_reader.enabledCondition.choices.doNotApply',
+                        'doNotApply'   => 'pim_enhanced_connector.product_reader.enabledCondition.choices.doNotApply',
                     ],
                 ],
             ],
             'categorizationCondition' => [
-                'type' => 'choice',
+                'type'    => 'choice',
                 'options' => [
                     'required' => true,
-                    'select2' => true,
-                    'help' => 'pim_enhanced_connector.product_reader.categorizationCondition.help',
-                    'label' => 'pim_enhanced_connector.product_reader.categorizationCondition.label',
-                    'choices' => [
-                        'onlyCategorized' =>
+                    'select2'  => true,
+                    'help'     => 'pim_enhanced_connector.product_reader.categorizationCondition.help',
+                    'label'    => 'pim_enhanced_connector.product_reader.categorizationCondition.label',
+                    'choices'  => [
+                        'onlyCategorized'    =>
                             'pim_enhanced_connector.product_reader.categorizationCondition.choices.onlyCategorized',
                         'onlyNonCategorized' =>
                             'pim_enhanced_connector.product_reader.categorizationCondition.choices.onlyNonCategorized',
-                        'doNotApply' =>
+                        'doNotApply'         =>
                             'pim_enhanced_connector.product_reader.categorizationCondition.choices.doNotApply',
                     ],
                 ],
             ],
-            'completeCondition' => [
-                'type' => 'choice',
+            'completeCondition'       => [
+                'type'    => 'choice',
                 'options' => [
                     'required' => true,
-                    'select2' => true,
-                    'help' => 'pim_enhanced_connector.product_reader.completeCondition.help',
-                    'label' => 'pim_enhanced_connector.product_reader.completeCondition.label',
-                    'choices' => [
-                        'onlyComplete' =>
+                    'select2'  => true,
+                    'help'     => 'pim_enhanced_connector.product_reader.completeCondition.help',
+                    'label'    => 'pim_enhanced_connector.product_reader.completeCondition.label',
+                    'choices'  => [
+                        'onlyComplete'   =>
                             'pim_enhanced_connector.product_reader.completeCondition.choices.onlyComplete',
                         'onlyUncomplete' =>
                             'pim_enhanced_connector.product_reader.completeCondition.choices.onlyUncomplete',
-                        'doNotApply' => 'pim_enhanced_connector.product_reader.completeCondition.choices.doNotApply',
+                        'doNotApply'     => 'pim_enhanced_connector.product_reader.completeCondition.choices.doNotApply',
                     ],
                 ],
             ],

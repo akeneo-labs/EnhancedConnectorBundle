@@ -53,15 +53,15 @@ class AttributeToFlatArrayProcessor extends AbstractConfigurableStepElement impl
         $flatAttribute = array_merge(
             $flatAttribute,
             [
-                'group' => ($attribute->getGroup()) ? $attribute->getGroup()->getCode() : null,
-                'unique' => (int) $attribute->isUnique(),
-                'useable_as_grid_filter' => (int) $attribute->isUseableAsGridFilter(),
-                'allowed_extensions' => implode(self::ITEM_SEPARATOR, $attribute->getAllowedExtensions()),
-                'metric_family' => $attribute->getMetricFamily(),
-                'default_metric_unit' => $attribute->getDefaultMetricUnit(),
-                'localizable' => (int) $attribute->isLocalizable(),
-                'scopable' => (int) $attribute->isScopable(),
-                'families' => $this->getAttributeFamilyCodes($attribute),
+                'group'                  => ($attribute->getGroup()) ? $attribute->getGroup()->getCode() : null,
+                'unique'                 => (int)$attribute->isUnique(),
+                'useable_as_grid_filter' => (int)$attribute->isUseableAsGridFilter(),
+                'allowed_extensions'     => implode(self::ITEM_SEPARATOR, $attribute->getAllowedExtensions()),
+                'metric_family'          => $attribute->getMetricFamily(),
+                'default_metric_unit'    => $attribute->getDefaultMetricUnit(),
+                'localizable'            => (int)$attribute->isLocalizable(),
+                'scopable'               => (int)$attribute->isScopable(),
+                'families'               => $this->getAttributeFamilyCodes($attribute),
             ]
         );
 

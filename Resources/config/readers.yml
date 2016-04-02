@@ -3,7 +3,7 @@ parameters:
 
 services:
     pim_enhanced_connector.reader.product:
-        class: %pim_enhanced_connector.reader.product.class%
+        class: '%pim_enhanced_connector.reader.product.class%'
         arguments:
             - '@pim_catalog.query.product_query_builder_factory'
             - '@pim_catalog.manager.channel'
@@ -12,4 +12,4 @@ services:
             - '@doctrine.orm.default_entity_manager'
             - '@akeneo_storage_utils.doctrine.object_detacher'
             - true
-            - %akeneo_batch.entity.job_execution.class%
+            - '%akeneo_batch.entity.job_execution.class%'
