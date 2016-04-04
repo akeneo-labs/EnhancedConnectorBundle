@@ -2,21 +2,21 @@
 
 namespace Pim\Bundle\EnhancedConnectorBundle\Processor;
 
-
-use Akeneo\Bundle\BatchBundle\Item\ItemProcessorInterface;
+use Akeneo\Component\Batch\Item\ItemProcessorInterface;
 use Pim\Bundle\BaseConnectorBundle\Processor\ProductToFlatArrayProcessor as ProductToFlatArray;
-use Pim\Bundle\CatalogBundle\Doctrine\ORM\Repository\AssociationTypeRepository;
-use Pim\Bundle\CatalogBundle\Doctrine\ORM\Repository\AttributeGroupRepository;
 use Pim\Bundle\CatalogBundle\Manager\ChannelManager;
-use Pim\Bundle\CatalogBundle\Model\ProductInterface;
-use Pim\Bundle\CatalogBundle\Model\ProductValueInterface;
+use Pim\Bundle\CatalogBundle\Repository\AssociationTypeRepositoryInterface;
+use Pim\Bundle\CatalogBundle\Repository\AttributeGroupRepositoryInterface;
+use Pim\Component\Catalog\Builder\ProductBuilderInterface;
+use Pim\Component\Catalog\Model\ProductInterface;
 use Symfony\Component\Serializer\Serializer;
 
 /**
  * Class ProductToFlatArrayProcessor
  *
- * @author  Synolia
- * @package Pim\Bundle\EnhancedConnectorBundle\Processor
+ * @author    Synolia
+ * @copyright 2016 Akeneo SAS (http://www.akeneo.com)
+ * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 class ProductToFlatArrayProcessor extends ProductToFlatArray implements ItemProcessorInterface
 {
@@ -26,27 +26,40 @@ class ProductToFlatArrayProcessor extends ProductToFlatArray implements ItemProc
     /** @var  array */
     protected $associationTypesToExclude;
 
-    /** @var  AttributeGroupRepository */
+    /** @var  AttributeGroupRepositoryInterface */
     protected $attributeGroupRepository;
 
-    /** @var  AssociationTypeRepository */
+    /** @var  AssociationTypeRepositoryInterface */
     protected $associationTypeRepository;
 
     /**
-     * @param Serializer $serializer
-     * @param ChannelManager $channelManager
-     * @param AttributeGroupRepository $attributeGroupRepository
-     * @param AssociationTypeRepository $associationTypeRepository
-     * @param string[] $mediaAttributeTypes
+     * @param Serializer                         $serializer
+     * @param ChannelManager                     $channelManager
+     * @param ProductBuilderInterface            $productBuilder
+     * @param array                              $mediaAttributeTypes
+     * @param array                              $decimalSeparators
+     * @param array                              $dateFormats
+     * @param AttributeGroupRepositoryInterface  $attributeGroupRepository
+     * @param AssociationTypeRepositoryInterface $associationTypeRepository
      */
     public function __construct(
         Serializer $serializer,
         ChannelManager $channelManager,
-        AttributeGroupRepository $attributeGroupRepository,
-        AssociationTypeRepository $associationTypeRepository,
-        array $mediaAttributeTypes
+        ProductBuilderInterface $productBuilder,
+        array $mediaAttributeTypes,
+        array $decimalSeparators,
+        array $dateFormats,
+        AttributeGroupRepositoryInterface $attributeGroupRepository,
+        AssociationTypeRepositoryInterface $associationTypeRepository
     ) {
-        parent::__construct($serializer, $channelManager, $mediaAttributeTypes);
+        parent::__construct(
+            $serializer,
+            $channelManager,
+            $productBuilder,
+            $mediaAttributeTypes,
+            $decimalSeparators,
+            $dateFormats
+        );
 
         $this->attributeGroupRepository  = $attributeGroupRepository;
         $this->associationTypeRepository = $associationTypeRepository;

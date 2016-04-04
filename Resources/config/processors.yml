@@ -21,6 +21,9 @@ services:
         arguments:
             - '@pim_serializer'
             - '@pim_catalog.manager.channel'
+            - '@pim_catalog.builder.product'
+            - ['pim_catalog_file', 'pim_catalog_image']
+            - %pim_catalog.localization.decimal_separators%
+            - %pim_catalog.localization.date_formats%
             - '@pim_catalog.repository.attribute_group'
             - '@pim_catalog.repository.association_type'
-            - ['pim_catalog_file', 'pim_catalog_image']
