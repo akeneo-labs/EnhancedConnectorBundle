@@ -43,7 +43,10 @@ class ProductReader extends AbstractConfigurableStepElement implements ProductRe
     /** @var EntityManagerInterface */
     protected $entityManager;
 
-    /** @var ObjectDetacherInterface */
+    /** 
+     * @var ObjectDetacherInterface
+     * @deprecated Will be removed in 1.3 
+     */
     protected $objectDetacher;
 
     /** @var bool */
@@ -385,6 +388,7 @@ class ProductReader extends AbstractConfigurableStepElement implements ProductRe
         }
 
         if (null !== $product) {
+            // use of objectDetacher in the reader is deprecated and will be removed in 1.3
             $this->objectDetacher->detach($product);
             $channel = $this->channelManager->getChannelByCode($this->channel);
             $this->metricConverter->convert($product, $channel);

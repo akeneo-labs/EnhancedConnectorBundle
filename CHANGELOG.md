@@ -1,4 +1,8 @@
-# 1.2 - (2016-03-08)
+# 1.2.1 - (not released)
+## Improvements
+- Detaching products in ProductReader is deprecated and will be removed in 1.3
+
+# 1.2.0 - (2016-03-08)
 ## New feature
 - Compatibility with Akeneo PIM 1.5
 
@@ -18,7 +22,6 @@
 # 1.0.5 (2016-01-11)
 ## Bug fixes
 - ECB-6: Detach products once processed to avoid memory leak
-
 
 # 1.0.4 (2016-01-07)
 ## New feature
