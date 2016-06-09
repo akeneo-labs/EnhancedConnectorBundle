@@ -1,4 +1,4 @@
-# 1.2.1 - (not released)
+# 1.2.1 - (2016-06-09)
 ## Improvements
 - Use of object detacher in ProductReader is deprecated and will be removed in 1.3
 
