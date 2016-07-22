@@ -24,7 +24,7 @@
         "phpspec/phpspec": "@stable",
         "squizlabs/php_codesniffer": "@stable",
         "phpmd/phpmd": "@stable",
-        "fabpot/php-cs-fixer": "@stable",
+        "friendsofphp/php-cs-fixer": "@stable",
         "henrikbjorn/phpspec-code-coverage": "@stable",
         "doctrine/migrations": "1.0.0-alpha3@alpha"
     },
