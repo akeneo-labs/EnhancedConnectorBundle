@@ -18,15 +18,14 @@
         }
     ],
     "require": {
-        "akeneo/pim-community-dev": "1.5.*"
+        "akeneo/pim-community-dev": "1.6.x@dev"
     },
     "require-dev": {
         "phpspec/phpspec": "@stable",
         "squizlabs/php_codesniffer": "@stable",
         "phpmd/phpmd": "@stable",
         "friendsofphp/php-cs-fixer": "@stable",
-        "henrikbjorn/phpspec-code-coverage": "@stable",
-        "doctrine/migrations": "1.0.0-alpha3@alpha"
+        "henrikbjorn/phpspec-code-coverage": "@stable"
     },
     "autoload": {
         "psr-4": { "Pim\\Bundle\\EnhancedConnectorBundle\\": "" }
@@ -36,7 +35,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.2.x-dev"
+            "dev-master": "1.6.x-dev"
         }
     }
 }
