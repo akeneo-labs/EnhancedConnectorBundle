@@ -1,3 +1,7 @@
+# 1.2.2 - (2016-08-04)
+## Improvements
+- Use startTime instead of endTime for last execution date
+
 # 1.2.1 - (2016-06-09)
 ## Improvements
 - Use of object detacher in ProductReader is deprecated and will be removed in 1.3

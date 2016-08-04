@@ -496,7 +496,7 @@ class ProductReader extends AbstractConfigurableStepElement implements ProductRe
     {
         $query = $this->entityManager->createQuery(
             sprintf(
-                'SELECT MAX(e.endTime) FROM %s e WHERE e.jobInstance = :jobInstance AND e.exitCode = :completed',
+                'SELECT MAX(e.startTime) FROM %s e WHERE e.jobInstance = :jobInstance AND e.exitCode = :completed',
                 $this->jobExecutionClass
             )
         );
