@@ -11,3 +11,5 @@ pim_enhanced_connector:
             locale:
                 label: Label locale
                 help:  Choose in which language you want to export the family label
+
+batch_jobs.enhanced_csv_attribute_export.export.label: Export attributes to CSV for PimGento

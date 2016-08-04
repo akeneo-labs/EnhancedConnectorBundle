@@ -7,3 +7,5 @@ pim_enhanced_connector:
                     title: Export des familles en CSV pour PimGento
                 attribute:
                     title: Export des attributs en CSV pour PimGento
+
+batch_jobs.enhanced_csv_attribute_export.export.label: Export des attributs en CSV pour PimGento

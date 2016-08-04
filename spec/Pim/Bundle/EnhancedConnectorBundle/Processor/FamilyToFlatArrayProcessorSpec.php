@@ -16,11 +16,6 @@ class FamilyToFlatArrayProcessorSpec extends ObjectBehavior
         $this->beConstructedWith($transNormalizer, $localeRepository);
     }
 
-    function it_is_a_configurable_step_element()
-    {
-        $this->beAnInstanceOf('Akeneo\Component\Batch\Item\AbstractConfigurableStepElement');
-    }
-
     function it_is_a_processor()
     {
         $this->shouldImplement('Akeneo\Component\Batch\Item\ItemProcessorInterface');
