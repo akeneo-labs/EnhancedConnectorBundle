@@ -1,19 +1,6 @@
 connector:
     name: Enhanced Connector
     jobs:
-        enhanced_csv_product_export:
-            title: pim_enhanced_connector.export.product.title
-            type:  export
-            steps:
-                export:
-                    title: pim_enhanced_connector.export.product.title
-                    services:
-                        reader:    pim_enhanced_connector.reader.product
-                        processor: pim_base_connector.processor.product_to_flat_array
-                        writer:    pim_base_connector.writer.file.csv_product
-                    parameters:
-                        batch_size: 10
-
         pimgento_csv_family_export:
             title: pim_enhanced_connector.export.pimgento.family.title
             type:  export

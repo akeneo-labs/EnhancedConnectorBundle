@@ -1,3 +1,9 @@
+# 1.6.x (????-??-??)
+## Improvements
+- Compatibility with PIM community edition 1.6
+- Compatibility with Pim enterprise edition 1.6
+- Remove the customized product export as the PIM 1.6 supports same filtering features (completeness, last export date)
+
 # 1.2.2 - (2016-08-04)
 ## Improvements
 - Use startTime instead of endTime for last execution date
