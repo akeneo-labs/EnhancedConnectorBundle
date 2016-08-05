@@ -21,11 +21,11 @@
         "akeneo/pim-community-dev": "1.6.x@dev"
     },
     "require-dev": {
-        "phpspec/phpspec": "@stable",
+        "phpspec/phpspec": "3.0.0",
         "squizlabs/php_codesniffer": "@stable",
         "phpmd/phpmd": "@stable",
         "friendsofphp/php-cs-fixer": "@stable",
-        "henrikbjorn/phpspec-code-coverage": "@stable"
+        "henrikbjorn/phpspec-code-coverage": "3.0.1"
     },
     "autoload": {
         "psr-4": { "Pim\\Bundle\\EnhancedConnectorBundle\\": "" }

@@ -1,6 +1,6 @@
 <?php
 
-namespace spec\Pim\Bundle\EnhancedConnectorBundle\Processor;
+namespace spec\Pim\Bundle\EnhancedConnectorBundle\Processor\Normalization;
 
 use PhpSpec\ObjectBehavior;
 use Pim\Component\Catalog\Repository\LocaleRepositoryInterface;
@@ -9,7 +9,7 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 /**
  * @author Romain Monceau <romain@akeneo.com>
  */
-class FamilyToFlatArrayProcessorSpec extends ObjectBehavior
+class FamilyProcessorSpec extends ObjectBehavior
 {
     function let(NormalizerInterface $transNormalizer, LocaleRepositoryInterface $localeRepository)
     {
