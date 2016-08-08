@@ -8,7 +8,7 @@ use Akeneo\Component\Batch\Step\StepExecutionAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 /**
- * Family to flat array processor.
+ * Family processor.
  *
  * @author    Damien Carcel <damien.carcel@akeneo.com>
  * @copyright 2015 Akeneo SAS (http://www.akeneo.com)

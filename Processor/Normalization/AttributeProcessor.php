@@ -7,7 +7,7 @@ use Pim\Component\Catalog\Model\AttributeInterface;
 use Pim\Component\Connector\Processor\Normalization\Processor;
 
 /**
- * Attribute to flat array processor.
+ * Attribute processor.
  *
  * @author    Damien Carcel <damien.carcel@akeneo.com>
  * @copyright 2015 Akeneo SAS (http://www.akeneo.com)

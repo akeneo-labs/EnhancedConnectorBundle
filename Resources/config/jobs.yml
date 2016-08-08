@@ -1,12 +1,13 @@
 parameters:
     pim_enhanced_connector.connector_name: 'Enhanced Connector'
-    pim_enhanced_connector.job_name.csv_attribute_export: 'enhanced_csv_attribute_export'
-    pim_enhanced_connector.job_name.csv_family_export: 'enhanced_csv_family_export'
+    pim_enhanced_connector.job_name.csv_attribute_export: 'pimgento_csv_attribute_export'
+    pim_enhanced_connector.job_name.csv_family_export: 'pimgento_csv_family_export'
     pim_enhanced_connector.job.job_parameters.default_values_provider.family_csv_export.class: Pim\Bundle\EnhancedConnectorBundle\Job\JobParameters\DefaultValuesProvider\FamilyCsvExport
     pim_enhanced_connector.job.job_parameters.constraint_collection_provider.family_csv_export.class: Pim\Bundle\EnhancedConnectorBundle\Job\JobParameters\ConstraintCollectionProvider\FamilyCsvExport
     pim_enhanced_connector.job_parameters.form_configuration_provider.family_csv_export.class: Pim\Bundle\EnhancedConnectorBundle\Job\JobParameters\FormConfigurationProvider\FamilyCsvExport
 
 services:
+    # Job Definition --------------------------------------------------------------------------------------------------
     pim_enhanced_connector.job.csv_attribute_export:
         class: '%pim_connector.job.simple_job.class%'
         arguments:
@@ -29,11 +30,12 @@ services:
         tags:
             - { name: akeneo_batch.job, connector: '%pim_enhanced_connector.connector_name%', type: '%pim_connector.job.export_type%' }
 
+    # Job Parameters --------------------------------------------------------------------------------------------------
     pim_enhanced_connector.job.job_parameters.default_values_provider.enhanced_csv_export:
         class: '%pim_connector.job.job_parameters.default_values_provider.simple_csv_export.class%'
         arguments:
             -
-                - 'enhanced_csv_attribute_export'
+                - '%pim_enhanced_connector.job_name.csv_attribute_export%'
         tags:
             - { name: akeneo_batch.job.job_parameters.default_values_provider }
 
@@ -41,7 +43,7 @@ services:
         class: '%pim_connector.job.job_parameters.constraint_collection_provider.simple_csv_export.class%'
         arguments:
             -
-                - 'enhanced_csv_attribute_export'
+                - '%pim_enhanced_connector.job_name.csv_attribute_export%'
         tags:
             - { name: akeneo_batch.job.job_parameters.constraint_collection_provider }
 
@@ -49,7 +51,7 @@ services:
         class: '%pim_import_export.job_parameters.form_configuration_provider.simple_csv_export.class%'
         arguments:
             -
-                - 'enhanced_csv_attribute_export'
+                - '%pim_enhanced_connector.job_name.csv_attribute_export%'
         tags:
             - { name: pim_import_export.job_parameters.form_configuration_provider }
 
@@ -58,7 +60,7 @@ services:
         arguments:
             - '@pim_connector.job.job_parameters.default_values_provider.simple_csv_export'
             -
-                - 'enhanced_csv_family_export'
+                - '%pim_enhanced_connector.job_name.csv_family_export%'
         tags:
             - { name: akeneo_batch.job.job_parameters.default_values_provider }
 
@@ -67,7 +69,7 @@ services:
         arguments:
             - '@pim_connector.job.job_parameters.constraint_collection_provider.simple_csv_export'
             -
-                - 'enhanced_csv_family_export'
+                - '%pim_enhanced_connector.job_name.csv_family_export%'
         tags:
             - { name: akeneo_batch.job.job_parameters.constraint_collection_provider }
 
@@ -77,6 +79,6 @@ services:
             - '@pim_import_export.job_parameters.form_configuration_provider.simple_csv_export'
             - '@pim_catalog.repository.locale'
             -
-                - 'enhanced_csv_family_export'
+                - '%pim_enhanced_connector.job_name.csv_family_export%'
         tags:
             - { name: pim_import_export.job_parameters.form_configuration_provider }
