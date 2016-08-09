@@ -1,16 +1,14 @@
 parameters:
-    pim_enhanced_connector.processor.family_to_flat_array.class:    Pim\Bundle\EnhancedConnectorBundle\Processor\FamilyToFlatArrayProcessor
-    pim_enhanced_connector.processor.attribute_to_flat_array.class: Pim\Bundle\EnhancedConnectorBundle\Processor\AttributeToFlatArrayProcessor
+    pim_enhanced_connector.processor.normalization.family.class:    Pim\Bundle\EnhancedConnectorBundle\Processor\Normalization\FamilyProcessor
+    pim_enhanced_connector.processor.normalization.attribute.class: Pim\Bundle\EnhancedConnectorBundle\Processor\Normalization\AttributeProcessor
 
 services:
-    pim_enhanced_connector.processor.family_to_flat_array:
-        class: '%pim_enhanced_connector.processor.family_to_flat_array.class%'
+    pim_enhanced_connector.processor.normalization.family:
+        class: '%pim_enhanced_connector.processor.normalization.family.class%'
         arguments:
             - '@pim_serializer.normalizer.label_translation'
-            - '@pim_catalog.repository.locale'
 
-    pim_enhanced_connector.processor.attribute_to_flat_array:
-        class: '%pim_enhanced_connector.processor.attribute_to_flat_array.class%'
+    pim_enhanced_connector.processor.normalization.attribute:
+        class: '%pim_enhanced_connector.processor.normalization.attribute.class%'
         arguments:
-            - '@pim_serializer.normalizer.flat.label_translation'
-            - '@pim_catalog.repository.locale'
+            - '@pim_connector.processor.normalization.attribute'

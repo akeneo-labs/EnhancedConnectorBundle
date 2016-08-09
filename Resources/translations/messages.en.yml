@@ -1,57 +1,19 @@
 pim_enhanced_connector:
-        export:
-            product:
-                title: Export products using enhanced product reader
+    export:
+        pimgento:
             family:
-                title: Export families to CSV
-            pimgento:
-                family:
-                    title: Export families to CSV for PimGento
-                attribute:
-                    title: Export attributes to CSV for PimGento
-        product_reader:
-            updatedCondition:
-                label: Updated time condition
-                help: Define if and how the updated time condition will apply on the product selection
-                choices:
-                    fromDefinedDate: Export products updated since the defined date
-                    fromLastExecution: Export products updated since the last execution of this job
-                    doNotApply: Export products regardless of their updated time
-            updatedSince:
-                label: Updated since
-                help: Define the minimum updated date to select product ('2010-07-31 10:12:30' format)
-            enabledCondition:
-                label: Status condition
-                help: Define if and how the status condition will apply on the product selection
-                choices:
-                    onlyEnabled: Export only enabled products
-                    onlyDisabled: Export only disabled products
-                    doNotApply: Export products regardless of their status
-            completeCondition:
-                label: Complete condition
-                help: Define if and how the complete condition will apply on the product selection
-                choices:
-                    onlyComplete: Export only complete products
-                    onlyUncomplete: Export only uncomplete products
-                    doNotApply: Export products regardless of their completeness
-            categorizationCondition:
-                label: Categorization condition
-                help: Define if and how the categorization condition will apply on the product selection
-                choices:
-                    onlyCategorized: Export only categorized products
-                    onlyNonCategorized: Export only non-categorized products
-                    doNotApply: Export products regardless of their categorization
-        family_processor:
-            locale:
-                label: Label locale
-                help:  Choose in which language you want to export the family label
+                title: Export families to CSV for PimGento
+            attribute:
+                title: Export attributes to CSV for PimGento
+    family_processor:
+        locale:
+            label: Label locale
+            help:  Choose in which language you want to export the family label
 
-doNotApply: N/A
-fromDefinedDate: Export products updated since the defined date
-fromLastExecution: Export products updated since the last execution of this job
-onlyEnabled: Export only enabled products
-onlyDisabled: Export only disabled products
-onlyComplete: Export only complete products
-onlyUncomplete: Export only uncomplete products
-onlyCategorized:  Export only categorized products
-onlyNoncategorized: Export only non-categorized products
+batch_jobs:
+    enhanced_csv_attribute_export:
+        label: Export attributes to CSV for PimGento
+        export.label: Export attributes to CSV for PimGento
+    enhanced_csv_family_export:
+        label: Export families to CSV for PimGento
+        export.label: Export families to CSV for PimGento

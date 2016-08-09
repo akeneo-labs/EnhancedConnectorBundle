@@ -1,3 +1,11 @@
+# 1.6.x (????-??-??)
+## Improvements
+- Compatibility with PIM community edition 1.6
+- Compatibility with PIM enterprise edition 1.6
+- Remove the customized product export as the PIM 1.6 supports same filtering features (completeness, last export date)
+- Move `Pim\Bundle\EnhancedConnectorBundle\Processor\AttributeToFlatArrayProcessor` to `Pim\Bundle\EnhancedConnectorBundle\Processor\Normalization\AttributeProcessor`
+- Move `Pim\Bundle\EnhancedConnectorBundle\Processor\FamilyToFlatArrayProcessor` to `Pim\Bundle\EnhancedConnectorBundle\Processor\Normalization\FamilyProcessor`
+
 # 1.2.2 - (2016-08-04)
 ## Improvements
 - Use startTime instead of endTime for last execution date

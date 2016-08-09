@@ -1,0 +1,20 @@
+services:
+    pim_enhanced_connector.step.csv_attribute.export:
+        class: '%pim_connector.step.item_step.class%'
+        arguments:
+            - 'export'
+            - '@event_dispatcher'
+            - '@akeneo_batch.job_repository'
+            - '@pim_connector.reader.database.attribute'
+            - '@pim_enhanced_connector.processor.normalization.attribute'
+            - '@pim_connector.writer.file.csv_attribute'
+
+    pim_enhanced_connector.step.csv_family.export:
+        class: '%pim_connector.step.item_step.class%'
+        arguments:
+            - 'export'
+            - '@event_dispatcher'
+            - '@akeneo_batch.job_repository'
+            - '@pim_connector.reader.database.family'
+            - '@pim_enhanced_connector.processor.normalization.family'
+            - '@pim_connector.writer.file.csv_family'

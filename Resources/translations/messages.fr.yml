@@ -1,57 +1,19 @@
 pim_enhanced_connector:
-        export:
-            product:
-                title: Export des products en utilisant le product reader avancé
+    export:
+        pimgento:
             family:
-                title: Export des familles en CSV
-            pimgento:
-                family:
-                    title: Export des familles en CSV pour PimGento
-                attribute:
-                    title: Export des attributs en CSV pour PimGento
-        product_reader:
-            updatedCondition:
-                label: Condition sur date de mise à jour
-                help: Définit si et comment la condition sur la date de mise à jour produit s'applique sur la sélection des produits
-                choices:
-                    fromDefinedDate: Exporte les produits modifiés depuis la date indiquée
-                    fromLastExecution: Exporte les produits modifiés depuis la dernière exécution de ce job
-                    doNotApply: Exporte les produits quelque soit leur date de mise à jour
-            updatedSince:
-                label: Modifiés depuis
-                help: Definit la date plancher de mise à jour produit (format '2010-07-31 10:12:30')
-            enabledCondition:
-                label: Condition sur état
-                help: Définit si et comment la condition sur état s'applique sur la sélection des produits
-                choices:
-                    onlyEnabled: Exporte seulement les produits activés
-                    onlyDisabled: Exporte seulement les produits désactivés
-                    doNotApply: Exporte les produits quelque soit leur état
-            completeCondition:
-                label: Condition sur complétude
-                help: Définit si et comment la condition sur la complétude s'applique à la sélection des produits
-                choices:
-                    onlyComplete: Exporte seulement les produits complets
-                    onlyUncomplete: Exporte seulement produits incomplets
-                    doNotApply: Exporte les produits quelque soit leur complétude
-            categorizationCondition:
-                label: Condition sur la catégorisation
-                help: Définit si et comment la condition sur la catégorisation s'applique à la sélection des produits
-                choices:
-                    onlyCategorized: Exporte seulement les produits appartenant à au moins une catégorie
-                    onlyNonCategorized: Exporte seulement les produits qui n'appartiennent à aucune catégorie
-                    doNotApply: Exportes les produits quelque soit leur appartenance ou non à une catégorie
-        family_processor:
-            locale:
-                label: Language du label
-                help:  Choisissez dans quelle langue vous souhaitez exporter le label de la famille
+                title: Export des familles en CSV pour PimGento
+            attribute:
+                title: Export des attributs en CSV pour PimGento
+    family_processor:
+        locale:
+            label: Language du label
+            help:  Choisissez dans quelle langue vous souhaitez exporter le label de la famille
 
-doNotApply: N/A
-fromDefinedDate: Exporte les produits modifiés depuis la date indiquée
-fromLastExecution: Exporte les produits modifiés depuis la dernière exécution de ce job
-onlyEnabled: Exporte seulement les produits activés
-onlyDisabled: Exporte seulement les produits désactivés
-onlyComplete: Exporte seulement les produits complets
-onlyUncomplete: Exporte seulement produits incomplets
-onlyCategorized:  Exporte seulement les produits appartenant à au moins une catégorie
-onlyNonCategorized: Exporte seulement les produits qui n'appartiennent à aucune catégorie
+batch_jobs:
+    enhanced_csv_attribute_export:
+        label: Export des attributs en CSV pour PimGento
+        export.label: Export des attributs en CSV pour PimGento
+    enhanced_csv_family_export:
+        label: Export des familles en CSV pour PimGento
+        export.label: Export des familles en CSV pour PimGento
