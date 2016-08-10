@@ -30,7 +30,6 @@
     "autoload": {
         "psr-4": { "Pim\\Bundle\\EnhancedConnectorBundle\\": "" }
     },
-    "target-dir": "Pim/Bundle/EnhancedConnectorBundle",
     "config": {
         "bin-dir": "bin"
     },
