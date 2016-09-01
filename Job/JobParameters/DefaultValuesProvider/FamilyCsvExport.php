@@ -36,7 +36,7 @@ class FamilyCsvExport implements DefaultValuesProviderInterface
     public function getDefaultValues()
     {
         $parameters = $this->simpleProvider->getDefaultValues();
-        $parameters['filePath'] = '/tmp/csv_family_pimgento_%datetime%.csv';
+        $parameters['filePath'] = '/tmp/csv_family_pimgento.csv';
         $parameters['labelLocale'] = null;
 
         return $parameters;

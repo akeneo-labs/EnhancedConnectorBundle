@@ -11,9 +11,9 @@ pim_enhanced_connector:
             help:  Choose in which language you want to export the family label
 
 batch_jobs:
-    enhanced_csv_attribute_export:
+    pimgento_csv_attribute_export:
         label: Export attributes to CSV for PimGento
         export.label: Export attributes to CSV for PimGento
-    enhanced_csv_family_export:
+    pimgento_csv_family_export:
         label: Export families to CSV for PimGento
         export.label: Export families to CSV for PimGento
