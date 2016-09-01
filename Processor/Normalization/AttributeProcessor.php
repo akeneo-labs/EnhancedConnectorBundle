@@ -4,7 +4,6 @@ namespace Pim\Bundle\EnhancedConnectorBundle\Processor\Normalization;
 
 use Akeneo\Component\Batch\Item\ItemProcessorInterface;
 use Pim\Component\Catalog\Model\AttributeInterface;
-use Pim\Component\Connector\Processor\Normalization\Processor;
 
 /**
  * Attribute processor.
@@ -18,10 +17,13 @@ class AttributeProcessor implements ItemProcessorInterface
     /** @const string */
     const ITEM_SEPARATOR = ',';
 
+    /** @var ItemProcessorInterface */
+    protected $baseProcessor;
+
     /**
-     * @param Processor $baseProcessor
+     * @param ItemProcessorInterface $baseProcessor
      */
-    public function __construct(Processor $baseProcessor)
+    public function __construct(ItemProcessorInterface $baseProcessor)
     {
         $this->baseProcessor = $baseProcessor;
     }
