@@ -34,15 +34,14 @@ Install the bundle with composer:
 Enable the bundle in the `app/AppKernel.php` file:
 
 ```php
-    public function registerBundles()
+    public function registerProjectBundles()
     {
-        $bundles = [
-            new Pim\Bundle\EnhancedConnectorBundle\PimEnhancedConnectorBundle()
-        ]
-
-        // ...
-
-        return $bundles;
+        return [
+            new Pim\Bundle\EnhancedConnectorBundle\PimEnhancedConnectorBundle(),
+            
+            // ...
+            
+        ];
     }
 ```
 
