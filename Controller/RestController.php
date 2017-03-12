@@ -25,7 +25,7 @@ class RestController
     }
 
     /**
-     * Return the list of activated locales
+     * Return the list of activated locales code
      *
      * @return JsonResponse
      */

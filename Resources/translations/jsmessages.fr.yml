@@ -1,0 +1,6 @@
+pim_enhanced_connector:
+    family_processor:
+        locale:
+            label: Locale label
+            help: Choisissez la langue d'export de vos labels de familles
+            no_locale: Il n'y a pas de locale active

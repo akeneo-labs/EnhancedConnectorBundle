@@ -1,0 +1,11 @@
+config:
+    paths:
+        activated-locales-list: pimenhancedconnector/js/activated-locales-list
+    config:
+        pim/fetcher-registry:
+            fetchers:
+                activated-locales-list:
+                    module: pim/base-fetcher
+                    options:
+                        urls:
+                            list: pim_enhanced_connector_activated_locales_list
