@@ -1,0 +1,4 @@
+pim_enhanced_connector_activated_locales_list:
+    path: /activated-locales
+    defaults: { _controller:  pim_enhanced_connector.rest.controller:listActivatedLocalesAction}
+    methods: [GET]

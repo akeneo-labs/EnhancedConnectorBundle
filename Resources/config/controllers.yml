@@ -1,0 +1,9 @@
+parameters:
+    pim_enhanced_connector.rest.controller.class: Pim\Bundle\EnhancedConnectorBundle\Controller\RestController
+
+services:
+    pim_enhanced_connector.rest.controller:
+        class: '%pim_enhanced_connector.rest.controller.class%'
+        scope: request
+        arguments:
+            - '@pim_catalog.repository.locale'
