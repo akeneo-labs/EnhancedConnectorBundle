@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Activated locales fetcher
+ * Activated locales select field
  *
  * @author    Anaël CHARDAN <anael.chardan@akeneo.com>
  * @copyright 2017 Akeneo SAS (http://www.akeneo.com)

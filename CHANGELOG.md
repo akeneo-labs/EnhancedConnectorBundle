@@ -1,3 +1,7 @@
+# 1.7.x (????-??-??)
+## Improvements
+- Compatibilty with PIM 1.7
+
 # 1.6.x (????-??-??)
 ## Improvements
 - Compatibility with PIM community edition 1.6
