@@ -26,14 +26,20 @@ define([
          */
         configure: function () {
             return $.when(
-                FetcherRegistry.getFetcher('activated-locales-list').fetchAll(),
+                FetcherRegistry.getFetcher('locale').fetchActivated(),
                 SelectField.prototype.configure.apply(this, arguments)
             ).then(function (activatedLocalesList) {
                 if (_.isEmpty(activatedLocalesList)) {
                     this.config.readOnly = true;
                     this.config.options = {'NO OPTION': __('pim_enhanced_connector.family_processor.locale.no_locale')};
                 } else {
-                    this.config.options = activatedLocalesList;
+                    var codes = {};
+
+                    _.each(activatedLocalesList, function (locale, index) {
+                        codes[locale.code] = locale.code;
+                    });
+
+                    this.config.options = codes;
                 }
             }.bind(this));
         }

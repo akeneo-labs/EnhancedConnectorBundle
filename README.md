@@ -45,14 +45,6 @@ Enable the bundle in the `app/AppKernel.php` file:
     }
 ```
 
-Add the routing configuration in you `app/config/routing.yml`:
-
-```yml
-    pim_enhanced_connector:
-        prefix: /enhanced-connector
-        resource: "@PimEnhancedConnectorBundle/Resources/config/routing.yml"
-```
-
 Now let's clean your cache and dump your assets:
 
 ```bash
