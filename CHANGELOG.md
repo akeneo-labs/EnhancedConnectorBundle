@@ -1,4 +1,10 @@
-# 1.6.x (????-??-??)
+# 1.4.0 (2017-03-14)
+## Improvements
+- Compatibility with PIM 1.7 community edition 1.7
+- Compatibility with PIM 1.7 enterprise edition 1.7
+- Remove all FormConfigurationProviders to use the new PEF for Jobs
+
+# 1.3.0 (2016-08-05)
 ## Improvements
 - Compatibility with PIM community edition 1.6
 - Compatibility with PIM enterprise edition 1.6

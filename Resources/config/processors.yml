@@ -6,7 +6,7 @@ services:
     pim_enhanced_connector.processor.normalization.family:
         class: '%pim_enhanced_connector.processor.normalization.family.class%'
         arguments:
-            - '@pim_serializer.normalizer.label_translation'
+            - '@pim_catalog.normalizer.standard.translation'
 
     pim_enhanced_connector.processor.normalization.attribute:
         class: '%pim_enhanced_connector.processor.normalization.attribute.class%'

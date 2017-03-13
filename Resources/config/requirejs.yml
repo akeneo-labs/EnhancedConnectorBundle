@@ -1,0 +1,3 @@
+config:
+    paths:
+        activated-locales-list: pimenhancedconnector/js/activated-locales-list
