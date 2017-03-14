@@ -17,6 +17,7 @@ However, it does not provide a SSH export as the DnD Magento connector bundle do
 
 | EnhancedConnectorBundle | Akeneo PIM Community Edition |
 |:-----------------------:|:----------------------------:|
+| v1.4.*                  | v1.7.*                       |
 | v1.3.*                  | v1.6.*                       |
 | v1.2.*                  | v1.5.*                       |
 | v1.1.*                  | v1.4.*                       |
