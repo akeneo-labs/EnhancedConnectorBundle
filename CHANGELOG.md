@@ -1,3 +1,7 @@
+# 1.2.3 (2017-04-11)
+## Bug fixes
+- ECB-13: fix ProductReader returning false 
+
 # 1.4.0 (2017-03-14)
 ## Improvements
 - Compatibility with PIM 1.7 community edition 1.7
