@@ -387,10 +387,12 @@ class ProductReader extends AbstractConfigurableStepElement implements ProductRe
             $this->products->next();
         }
 
-        if (null !== $product) {
-            $channel = $this->channelManager->getChannelByCode($this->channel);
-            $this->metricConverter->convert($product, $channel);
+        if (null === $product || false === $product) {
+            return null;
         }
+        
+        $channel = $this->channelManager->getChannelByCode($this->channel);
+        $this->metricConverter->convert($product, $channel);
 
         return $product;
     }
