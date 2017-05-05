@@ -1,3 +1,11 @@
+# 1.2.4 (2017-05-05)
+## Bug fixes
+fix composer PIM dependency
+
+# 1.2.3 (2017-04-11)
+## Bug fixes
+ECB-13: fix ProductReader returning false
+
 # 1.2.2 - (2016-08-04)
 ## Improvements
 - Use startTime instead of endTime for last execution date
