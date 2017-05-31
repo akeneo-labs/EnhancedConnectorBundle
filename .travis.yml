@@ -1,10 +1,9 @@
 language: php
+sudo: false
 
 php:
     - 5.6
     - 7.1
-
-sudo: false
 
 matrix:
     allow_failures:
@@ -12,16 +11,15 @@ matrix:
 
 cache:
     directories:
-        - $HOME/.composer/cache
+        - $HOME/.composer/cache/files
 
 before_install:
     - echo "memory_limit=3G" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
     - phpenv config-rm xdebug.ini || echo "xdebug not available for PHP $TRAVIS_PHP_VERSION"
     - echo -e "Host github.com\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
-    - composer self-update --no-interaction
 
 install:
-    - composer update --no-interaction --no-scripts --prefer-dist
+    - composer install --no-interaction --no-scripts --prefer-dist
 
 script:
     - ./bin/phpspec run
