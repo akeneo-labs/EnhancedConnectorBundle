@@ -1,3 +1,7 @@
+# 1.4.1 (2017-05-31)
+## Bug fixes
+- GITHUB-90: family export doesnt export label
+
 # 1.2.3 (2017-04-11)
 ## Bug fixes
 - ECB-13: fix ProductReader returning false 

@@ -41,8 +41,8 @@ class FamilyProcessor implements ItemProcessorInterface, StepExecutionAwareInter
         $flatFamily = ['code' => $family->getCode()];
 
         $familyLabels = $this->transNormalizer->normalize($family);
-        if (!empty($familyLabels['labels'])) {
-            $flatFamily['label'] = $familyLabels['labels'][$labelLocale];
+        if (!empty($familyLabels)) {
+            $flatFamily['label'] = $familyLabels[$labelLocale];
         } else {
             $flatFamily['label'] = sprintf('[%s]', $family->getCode());
         }
