@@ -2,6 +2,8 @@
 
 namespace Pim\Bundle\EnhancedConnectorBundle;
 
+use Pim\Bundle\EnhancedConnectorBundle\DependencyInjection\Compiler\RegisterFormExtensionPass;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
@@ -13,4 +15,10 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
  */
 class PimEnhancedConnectorBundle extends Bundle
 {
+    public function build(ContainerBuilder $container)
+    {
+        if (class_exists('PimEnterprise\Bundle\WorkflowBundle\PimEnterpriseWorkflowBundle')) {
+            $container->addCompilerPass(new RegisterFormExtensionPass());
+        }
+    }
 }
