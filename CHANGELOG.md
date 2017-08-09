@@ -1,3 +1,7 @@
+# 1.4.3
+## Bug fixes
+- ECB-14: Fix permissions on job profiles
+
 # 1.4.1 (2017-05-31)
 ## Bug fixes
 - GITHUB-90: family export doesnt export label
